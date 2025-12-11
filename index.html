@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Genie - השותף שלך לפרויקט</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Google Fonts (Heebo for Hebrew) -->
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <style>
+        body {
+            font-family: 'Heebo', sans-serif;
+            background-color: #f8fafc; /* Slate 50 */
+            color: #1e293b; /* Slate 800 */
+        }
+
+        /* Chart Container Styling (Mandatory) */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px; /* Max width for larger screens */
+            height: 300px;    /* Base height */
+            max-height: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+
+        /* Custom Scrollbar for cleaner look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #94a3b8;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+
+        .nav-item.active {
+            background-color: #dcfce7; /* Green 100 */
+            color: #166534; /* Green 800 */
+            border-right: 4px solid #16a34a; /* Green 600 */
+        }
+    </style>
+
+    <!-- Placeholder Comments -->
+    <!-- Chosen Palette: Modern Developer (Slate/White/Emerald Green) - Clean, professional, resembling an IDE but friendly. -->
+    <!-- Application Structure Plan: Dashboard layout. Sidebar for navigation (Overview, Team, Mission, Checklist). Main area dynamically updates. Tabs used for mission steps to reduce cognitive load. Interactive checklist updates a progress chart. -->
+    <!-- Visualization & Content Choices: 
+         1. Persona Chart (Bar): Compares the "Bummer" vs "Smiley" attributes. Goal: Compare.
+         2. Complexity Chart (Line): Shows difficulty ramp-up of steps. Goal: Inform.
+         3. Progress Chart (Doughnut): Real-time checklist status. Goal: Status.
+         4. Toggle Quotes: Interactive text blocks for Personas. Goal: Engagement.
+         CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="h-screen flex flex-col md:flex-row overflow-hidden">
+
+    <!-- Sidebar Navigation -->
+    <aside class="w-full md:w-64 bg-white shadow-lg z-10 flex flex-col justify-between flex-shrink-0">
+        <div>
+            <div class="p-6 border-b border-gray-100 flex items-center justify-center flex-col">
+                <div class="text-4xl mb-2">🧞‍♂️</div>
+                <h1 class="text-xl font-bold text-slate-800 tracking-tight">Java Genie</h1>
+                <p class="text-xs text-slate-500">השותף שלך לפרויקט אנדרואיד</p>
+            </div>
+            
+            <nav class="mt-6 flex flex-col gap-1 p-2">
+                <button onclick="navigate('overview')" id="nav-overview" class="nav-item active w-full text-right px-4 py-3 rounded-lg hover:bg-slate-50 transition-colors duration-200 flex items-center gap-3">
+                    <span>🏠</span> ראשי
+                </button>
+                <button onclick="navigate('team')" id="nav-team" class="nav-item w-full text-right px-4 py-3 rounded-lg hover:bg-slate-50 transition-colors duration-200 flex items-center gap-3">
+                    <span>🎭</span> הדמויות שלנו
+                </button>
+                <button onclick="navigate('mission')" id="nav-mission" class="nav-item w-full text-right px-4 py-3 rounded-lg hover:bg-slate-50 transition-colors duration-200 flex items-center gap-3">
+                    <span>📱</span> המשימה: יישום מתגלגל
+                </button>
+                <button onclick="navigate('checklist')" id="nav-checklist" class="nav-item w-full text-right px-4 py-3 rounded-lg hover:bg-slate-50 transition-colors duration-200 flex items-center gap-3">
+                    <span>✅</span> צ'ק ליסט התקדמות
+                </button>
+            </nav>
+        </div>
+        
+        <div class="p-4 bg-slate-50 text-center text-xs text-slate-400 border-t">
+            גרסה 1.0 <br> מבוסס על מסמך אפיון
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 overflow-y-auto bg-slate-50 p-4 md:p-8 relative">
+        <div id="content-area" class="max-w-5xl mx-auto space-y-6">
+            <!-- Dynamic Content Injected Here -->
+        </div>
+    </main>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- DATA STORE ---
+        const appData = {
+            overview: {
+                title: "ברוכים הבאים ל-Java Genie",
+                subtitle: "מנטור וירטואלי לתלמידי מגמת אנדרואיד (5 יח\"ל)",
+                intro: "פרויקט הגמר באנדרואיד יכול להיות מלחיץ. באגים, קריסות, והדד-ליין שמתקרב... בדיוק בשביל זה אני כאן. אני מלווה אותך צעד אחר צעד: מרעיון ועד לספר הפרויקט.",
+                features: [
+                    { icon: "🎓", title: "ליווי אישי", desc: "הכוונה צמודה בכתיבת הקוד והתגברות על תקלות." },
+                    { icon: "📚", title: "ספר פרויקט", desc: "עזרה בניסוח וכתיבת התיעוד הנדרש לבגרות." },
+                    { icon: "⚖️", title: "איזון רגשי", desc: "שילוב של תמיכה אופטימית וריאליזם פסימי." }
+                ]
+            },
+            team: {
+                title: "הצוות שלך: הקולות בראש",
+                intro: "כדי לתת חוויה ריאליסטית, הליווי מתבצע על ידי שתי דמויות מנוגדות. האחת דוחפת קדימה, והשנייה מכינה אותך לנפילה.",
+                bummer: {
+                    name: "המבאס (The Bummer)",
+                    role: "הריאליסט הפסימי",
+                    desc: "הוא יודע שהאמולטור ייתקע ושה-Gradle יכשל. הוא נותן לגיטימציה לתסכול שלך.",
+                    quote: "בטח שכחת להוסיף הרשאות ל-Manifest, אה? קלאסי."
+                },
+                smiley: {
+                    name: "סמיילי פייס (Smiley Face)",
+                    role: "המעודד הנצחי",
+                    desc: "רואה בכל שגיאה הזדמנות ללמוד. הוא זה שידחוף אותך להמשיך כשבא לך לשבור את המקלדת.",
+                    quote: "היי! קרסה האפליקציה? מעולה! זה אומר שאנחנו מתקדמים."
+                }
+            },
+            mission: {
+                title: "המשימה הראשונה: היישום המתגלגל",
+                intro: "אנחנו לא מתחילים מהפיצ'ר הכי מסובך. המטרה היא לבנות 'אפליקציה מתגלגלת' - בסיס פשוט שעליו נלביש את הפרויקט הגדול.",
+                steps: [
+                    {
+                        id: 1,
+                        title: "שלב 1: בדיקת סביבה ו-Views",
+                        goal: "לוודא שה-Android Studio לא קורס ושיש חיבור בין XML ל-Java.",
+                        tasks: [
+                            "צרו פרויקט חדש (Empty Activity).",
+                            "ב-activity_main.xml צרו EditText, Button, TextView.",
+                            "ב-MainActivity.java השתמשו ב-findViewById.",
+                            "צרו OnClickListener לכפתור המציג את הטקסט ב-TextView."
+                        ],
+                        bummerQuote: "רק אל תקראו לכפתור button1, תשקיעו ב-ID נורמלי כמו btnSave. אתם תודו לי אחר כך כשהקוד שלכם יראה כמו ספגטי.",
+                        smileyQuote: "איזה כיף! ברגע שתראו את השם שלכם מופיע על המסך, תרגישו כמו קוסמים. יאללה, לקודד!"
+                    },
+                    {
+                        id: 2,
+                        title: "שלב 2: זיכרון (SharedPreferences)",
+                        goal: "המשתמש יצא מהאפליקציה? אנחנו רוצים לזכור מי הוא היה.",
+                        tasks: [
+                            "הוסיפו מחלקה לטיפול ב-SharedPreferences.",
+                            "בשמירה: בתוך ה-Listener, שמרו את השם בזיכרון (commit/apply).",
+                            "בשליפה: ב-onCreate, בדקו אם יש שם שמור והציגו אותו מיד."
+                        ],
+                        bummerQuote: "אני שם כסף ששכחתם לעשות commit או apply והנתונים פשוט נעלמו לאוויר. תבדקו שוב.",
+                        smileyQuote: "זה הרגע שבו האפליקציה הופכת לחכמה! היא זוכרת את המשתמש. זה הבסיס לכל אפליקציה גדולה."
+                    },
+                    {
+                        id: 3,
+                        title: "שלב 3: מעבר בין מסכים (Intents)",
+                        goal: "אפליקציה עם מסך אחד זה משעמם. בואו נלמד לעבור דירה.",
+                        tasks: [
+                            "צרו Activity חדש (למשל HomeActivity).",
+                            "לאחר שמירה מוצלחת, השתמשו ב-Intent למעבר מסך.",
+                            "בונוס: אפשרו מעבר רק אם הסיסמה תואמת למה שנשמר."
+                        ],
+                        bummerQuote: "אל תשכחו להוסיף את ה-Activity החדש ל-AndroidManifest.xml, אחרת האפליקציה תקרוס ותבכו לי.",
+                        smileyQuote: "דמיינו את זה: המשתמש נרשם, לוחץ, ובום! עובר למשחק המטורף שתבנו."
+                    }
+                ]
+            },
+            checklist: {
+                title: "צ'ק ליסט לסיום המשימה",
+                intro: "לפני שממשיכים, חייבים לוודא שהכל עובד. ה-V הזה חשוב גם לספר הפרויקט שלכם!",
+                items: [
+                    { id: "c1", text: "האפליקציה רצה על האמולטור/מכשיר פיזי", checked: false },
+                    { id: "c2", text: "הכנסתם שם, לחצתם, והוא הופיע", checked: false },
+                    { id: "c3", text: "לאחר סגירה מלאה (Kill) ופתיחה מחדש - השם הופיע לבד", checked: false },
+                    { id: "c4", text: "קיים מעבר תקין למסך שני", checked: false },
+                    { id: "c5", text: "הקוד מסודר עם הערות (Documentation)", checked: false }
+                ]
+            }
+        };
+
+        let currentTab = 0; // For Mission steps
+        let currentPersonaView = 'smiley'; // For feedback toggle
+
+        // --- CORE NAVIGATION ---
+        function navigate(viewId) {
+            // Update active state in sidebar
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            document.getElementById(`nav-${viewId}`).classList.add('active');
+
+            // Render content
+            const contentDiv = document.getElementById('content-area');
+            contentDiv.innerHTML = ''; // Clear current content
+            
+            // Destroy old charts to prevent memory leaks/overlays
+            Chart.helpers.each(Chart.instances, function (instance) {
+                instance.destroy();
+            });
+
+            switch (viewId) {
+                case 'overview':
+                    renderOverview(contentDiv);
+                    break;
+                case 'team':
+                    renderTeam(contentDiv);
+                    break;
+                case 'mission':
+                    renderMission(contentDiv);
+                    break;
+                case 'checklist':
+                    renderChecklist(contentDiv);
+                    break;
+            }
+        }
+
+        // --- RENDER FUNCTIONS ---
+
+        function renderOverview(container) {
+            container.innerHTML = `
+                <div class="bg-white rounded-2xl shadow-sm p-8 border-t-4 border-emerald-500 animate-fade-in">
+                    <h2 class="text-3xl font-bold text-slate-800 mb-2">${appData.overview.title}</h2>
+                    <h3 class="text-xl text-emerald-600 mb-6">${appData.overview.subtitle}</h3>
+                    <p class="text-slate-600 text-lg leading-relaxed mb-8">${appData.overview.intro}</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        ${appData.overview.features.map(f => `
+                            <div class="bg-slate-50 p-6 rounded-xl border border-slate-100 text-center hover:shadow-md transition-shadow">
+                                <div class="text-4xl mb-3">${f.icon}</div>
+                                <h4 class="font-bold text-slate-700 mb-2">${f.title}</h4>
+                                <p class="text-sm text-slate-500">${f.desc}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white rounded-2xl shadow-sm p-6">
+                        <h4 class="font-bold text-slate-700 mb-4 border-b pb-2">רמת קושי צפויה</h4>
+                        <div class="chart-container">
+                            <canvas id="complexityChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-emerald-600 text-white rounded-2xl shadow-sm p-8 flex flex-col justify-center items-center text-center">
+                        <div class="text-6xl mb-4">🚀</div>
+                        <h3 class="text-2xl font-bold mb-2">מוכנים להתחיל?</h3>
+                        <p class="mb-6 opacity-90">הצעד הראשון לפרויקט 5 יח"ל מתחיל ב"יישום המתגלגל".</p>
+                        <button onclick="navigate('mission')" class="bg-white text-emerald-700 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-emerald-50 transition transform hover:-translate-y-1">
+                            בואו נתחיל לבנות
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            initComplexityChart();
+        }
+
+        function renderTeam(container) {
+            const data = appData.team;
+            container.innerHTML = `
+                <div class="bg-white rounded-2xl shadow-sm p-8 mb-6">
+                    <h2 class="text-2xl font-bold text-slate-800 mb-4">${data.title}</h2>
+                    <p class="text-slate-600">${data.intro}</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                    <!-- Bummer Card -->
+                    <div class="bg-white rounded-2xl shadow-sm overflow-hidden border-t-4 border-gray-400 group hover:shadow-lg transition">
+                        <div class="p-6 bg-gray-50 flex items-center gap-4">
+                            <div class="text-5xl group-hover:scale-110 transition">😒</div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800">${data.bummer.name}</h3>
+                                <span class="text-xs font-bold uppercase tracking-wider text-gray-500">${data.bummer.role}</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-slate-600 mb-4 min-h-[60px]">${data.bummer.desc}</p>
+                            <div class="bg-gray-100 p-4 rounded-lg italic text-gray-600 relative">
+                                <span class="absolute top-0 right-2 text-4xl text-gray-300">"</span>
+                                ${data.bummer.quote}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Smiley Card -->
+                    <div class="bg-white rounded-2xl shadow-sm overflow-hidden border-t-4 border-yellow-400 group hover:shadow-lg transition">
+                        <div class="p-6 bg-yellow-50 flex items-center gap-4">
+                            <div class="text-5xl group-hover:scale-110 transition">😎</div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800">${data.smiley.name}</h3>
+                                <span class="text-xs font-bold uppercase tracking-wider text-yellow-600">${data.smiley.role}</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-slate-600 mb-4 min-h-[60px]">${data.smiley.desc}</p>
+                            <div class="bg-yellow-50 p-4 rounded-lg italic text-yellow-700 relative">
+                                <span class="absolute top-0 right-2 text-4xl text-yellow-200">"</span>
+                                ${data.smiley.quote}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-sm p-6">
+                    <h3 class="font-bold text-slate-700 mb-4 text-center">איזון רגשי בלווי הפרויקט</h3>
+                    <div class="chart-container">
+                        <canvas id="personaChart"></canvas>
+                    </div>
+                </div>
+            `;
+            initPersonaChart();
+        }
+
+        function renderMission(container) {
+            const data = appData.mission;
+            const step = data.steps[currentTab];
+
+            container.innerHTML = `
+                <div class="bg-white rounded-2xl shadow-sm p-6 mb-6">
+                     <h2 class="text-2xl font-bold text-slate-800 mb-2">${data.title}</h2>
+                     <p class="text-slate-600">${data.intro}</p>
+                </div>
+
+                <!-- Tabs -->
+                <div class="flex gap-2 overflow-x-auto pb-2 mb-4">
+                    ${data.steps.map((s, index) => `
+                        <button onclick="setTab(${index})" class="whitespace-nowrap px-6 py-3 rounded-xl font-bold transition-all duration-200 ${currentTab === index ? 'bg-emerald-600 text-white shadow-md' : 'bg-white text-slate-600 hover:bg-slate-100'}">
+                            ${s.title}
+                        </button>
+                    `).join('')}
+                </div>
+
+                <!-- Active Step Content -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 animate-fade-in">
+                    <!-- Instructions -->
+                    <div class="lg:col-span-2 bg-white rounded-2xl shadow-sm p-8">
+                        <div class="flex items-start justify-between mb-6">
+                            <h3 class="text-2xl font-bold text-slate-800">${step.title}</h3>
+                            <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full">שלב ${step.id}</span>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <h4 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-2">המטרה</h4>
+                            <p class="text-lg text-slate-700 font-medium">${step.goal}</p>
+                        </div>
+
+                        <div class="bg-slate-50 rounded-xl p-6 border border-slate-100">
+                            <h4 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">הוראות ביצוע</h4>
+                            <ul class="space-y-4">
+                                ${step.tasks.map(task => `
+                                    <li class="flex items-start gap-3">
+                                        <span class="mt-1 text-emerald-500">➜</span>
+                                        <span class="text-slate-700">${task}</span>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Mentor Interaction -->
+                    <div class="lg:col-span-1 flex flex-col gap-4">
+                        <div class="bg-white rounded-2xl shadow-sm p-6 flex-1 flex flex-col">
+                            <h4 class="font-bold text-slate-700 mb-4 text-center">התייעץ עם המנטור</h4>
+                            
+                            <div class="flex bg-slate-100 rounded-lg p-1 mb-6">
+                                <button onclick="togglePersona('smiley')" class="flex-1 py-2 rounded-md text-sm font-bold transition ${currentPersonaView === 'smiley' ? 'bg-white shadow text-emerald-600' : 'text-slate-500 hover:text-slate-700'}">
+                                    😎 אופטימי
+                                </button>
+                                <button onclick="togglePersona('bummer')" class="flex-1 py-2 rounded-md text-sm font-bold transition ${currentPersonaView === 'bummer' ? 'bg-white shadow text-gray-600' : 'text-slate-500 hover:text-slate-700'}">
+                                    😒 פסימי
+                                </button>
+                            </div>
+
+                            <div class="flex-1 flex flex-col items-center justify-center text-center transition-all duration-300" id="mentor-box">
+                                <div class="text-6xl mb-4 animate-bounce-slow">
+                                    ${currentPersonaView === 'smiley' ? '😎' : '😒'}
+                                </div>
+                                <div class="bg-${currentPersonaView === 'smiley' ? 'yellow' : 'gray'}-50 p-4 rounded-xl border border-${currentPersonaView === 'smiley' ? 'yellow' : 'gray'}-100">
+                                    <p class="text-${currentPersonaView === 'smiley' ? 'yellow' : 'gray'}-800 italic">
+                                        "${currentPersonaView === 'smiley' ? step.smileyQuote : step.bummerQuote}"
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderChecklist(container) {
+            const data = appData.checklist;
+            const completedCount = data.items.filter(i => i.checked).length;
+            const totalCount = data.items.length;
+            const percentage = Math.round((completedCount / totalCount) * 100);
+
+            container.innerHTML = `
+                <div class="bg-white rounded-2xl shadow-sm p-6 mb-6">
+                     <h2 class="text-2xl font-bold text-slate-800 mb-2">${data.title}</h2>
+                     <p class="text-slate-600">${data.intro}</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Checklist Items -->
+                    <div class="bg-white rounded-2xl shadow-sm p-8">
+                        <h3 class="font-bold text-slate-700 mb-6 border-b pb-2">רשימת משימות</h3>
+                        <div class="space-y-4">
+                            ${data.items.map(item => `
+                                <label class="flex items-center gap-4 p-4 rounded-xl border-2 transition cursor-pointer ${item.checked ? 'border-emerald-500 bg-emerald-50' : 'border-slate-100 hover:border-emerald-200'}">
+                                    <div class="relative flex items-center">
+                                        <input type="checkbox" onchange="toggleCheck('${item.id}')" ${item.checked ? 'checked' : ''} class="w-6 h-6 text-emerald-600 rounded focus:ring-emerald-500 border-gray-300">
+                                    </div>
+                                    <span class="text-lg ${item.checked ? 'text-emerald-800 line-through' : 'text-slate-700'}">${item.text}</span>
+                                </label>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <!-- Progress Visualization -->
+                    <div class="flex flex-col gap-6">
+                        <div class="bg-white rounded-2xl shadow-sm p-8 flex flex-col items-center justify-center">
+                            <h3 class="font-bold text-slate-700 mb-4">סטטוס התקדמות</h3>
+                            <div class="chart-container relative">
+                                <canvas id="progressChart"></canvas>
+                                <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                                    <div class="text-center">
+                                        <span class="text-4xl font-bold text-slate-800 block">${percentage}%</span>
+                                        <span class="text-xs text-slate-500">הושלם</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        ${percentage === 100 ? `
+                        <div class="bg-emerald-600 text-white rounded-2xl shadow-lg p-6 text-center animate-pulse">
+                            <div class="text-4xl mb-2">🎉</div>
+                            <h3 class="text-xl font-bold">כל הכבוד!</h3>
+                            <p>סיימתם את היישום המתגלגל. חזרו לג'יני לשלב הבא!</p>
+                        </div>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+            initProgressChart(completedCount, totalCount - completedCount);
+        }
+
+        // --- INTERACTIVITY ACTIONS ---
+
+        function setTab(index) {
+            currentTab = index;
+            renderMission(document.getElementById('content-area'));
+        }
+
+        function togglePersona(persona) {
+            currentPersonaView = persona;
+            renderMission(document.getElementById('content-area'));
+        }
+
+        function toggleCheck(id) {
+            const item = appData.checklist.items.find(i => i.id === id);
+            if (item) {
+                item.checked = !item.checked;
+                renderChecklist(document.getElementById('content-area'));
+            }
+        }
+
+        // --- CHART CONFIGURATIONS ---
+
+        function initComplexityChart() {
+            const ctx = document.getElementById('complexityChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['שלב 1: Views', 'שלב 2: Storage', 'שלב 3: Intents'],
+                    datasets: [{
+                        label: 'רמת מורכבות',
+                        data: [20, 50, 80],
+                        borderColor: '#10b981', // Emerald 500
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        borderWidth: 3,
+                        tension: 0.4,
+                        fill: true,
+                        pointBackgroundColor: '#ffffff',
+                        pointBorderColor: '#059669',
+                        pointRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { 
+                            callbacks: {
+                                label: (ctx) => `קושי: ${ctx.raw}%`
+                            }
+                        }
+                    },
+                    scales: {
+                        y: { beginAtZero: true, max: 100, display: false },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        function initPersonaChart() {
+            const ctx = document.getElementById('personaChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['תמיכה רגשית', 'בדיקת מציאות', 'דחיפה לפעולה', 'ניהול סיכונים'],
+                    datasets: [
+                        {
+                            label: 'סמיילי (אופטימי)',
+                            data: [90, 20, 95, 10],
+                            backgroundColor: '#fbbf24', // Amber 400
+                            borderRadius: 6
+                        },
+                        {
+                            label: 'המבאס (פסימי)',
+                            data: [10, 95, 30, 90],
+                            backgroundColor: '#9ca3af', // Gray 400
+                            borderRadius: 6
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom' }
+                    },
+                    scales: {
+                        y: { beginAtZero: true, max: 100 },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        function initProgressChart(done, remaining) {
+            const ctx = document.getElementById('progressChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['הושלם', 'נותר'],
+                    datasets: [{
+                        data: [done, remaining],
+                        backgroundColor: ['#10b981', '#e2e8f0'], // Emerald 500, Slate 200
+                        borderWidth: 0,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '75%',
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { enabled: false }
+                    }
+                }
+            });
+        }
+
+        // --- INITIALIZATION ---
+        window.onload = function() {
+            navigate('overview');
+        };
+
+    </script>
+</body>
+</html>
