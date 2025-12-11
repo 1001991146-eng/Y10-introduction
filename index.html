@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Java Genie - השותף שלך לפרויקט</title>
+    <title>Java Genie Junior - הכיתה שלך</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -55,51 +55,59 @@
         }
 
         .nav-item.active {
-            background-color: #dcfce7; /* Green 100 */
-            color: #166534; /* Green 800 */
-            border-right: 4px solid #16a34a; /* Green 600 */
+            background-color: #e0f2fe; /* Sky 100 */
+            color: #0369a1; /* Sky 700 */
+            border-right: 4px solid #0ea5e9; /* Sky 500 */
+        }
+        
+        .tab-btn.active {
+            background-color: #0ea5e9;
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .tab-btn.inactive {
+            background-color: white;
+            color: #475569;
+        }
+        .tab-btn.inactive:hover {
+            background-color: #f1f5f9;
         }
     </style>
 
     <!-- Placeholder Comments -->
-    <!-- Chosen Palette: Modern Developer (Slate/White/Emerald Green) - Clean, professional, resembling an IDE but friendly. -->
-    <!-- Application Structure Plan: Dashboard layout. Sidebar for navigation (Overview, Team, Mission, Checklist). Main area dynamically updates. Tabs used for mission steps to reduce cognitive load. Interactive checklist updates a progress chart. -->
-    <!-- Visualization & Content Choices: 
-         1. Persona Chart (Bar): Compares the "Bummer" vs "Smiley" attributes. Goal: Compare.
-         2. Complexity Chart (Line): Shows difficulty ramp-up of steps. Goal: Inform.
-         3. Progress Chart (Doughnut): Real-time checklist status. Goal: Status.
-         4. Toggle Quotes: Interactive text blocks for Personas. Goal: Engagement.
-         CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <!-- Chosen Palette: Junior Edition (Sky Blue/White/Slate) - Friendly, educational, approachable. -->
+    <!-- Application Structure Plan: Dashboard layout. Updated "Overview" with Classroom instructions. "Mission" section now includes a Backstory tab and uses "Empty Views Activity". -->
 </head>
 <body class="h-screen flex flex-col md:flex-row overflow-hidden">
 
     <!-- Sidebar Navigation -->
     <aside class="w-full md:w-64 bg-white shadow-lg z-10 flex flex-col justify-between flex-shrink-0">
         <div>
-            <div class="p-6 border-b border-gray-100 flex items-center justify-center flex-col">
-                <div class="text-4xl mb-2">🧞‍♂️</div>
-                <h1 class="text-xl font-bold text-slate-800 tracking-tight">Java Genie</h1>
-                <p class="text-xs text-slate-500">השותף שלך לפרויקט אנדרואיד</p>
+            <div class="p-6 border-b border-gray-100 flex items-center justify-center flex-col bg-sky-50">
+                <div class="text-5xl mb-2">🤖</div>
+                <h1 class="text-xl font-bold text-sky-900 tracking-tight text-center">Java Genie <span class="text-sky-500">Junior</span></h1>
+                <p class="text-xs text-sky-600 font-medium">עוזר אישי לפיתוח אפליקציות</p>
             </div>
             
             <nav class="mt-6 flex flex-col gap-1 p-2">
-                <button onclick="navigate('overview')" id="nav-overview" class="nav-item active w-full text-right px-4 py-3 rounded-lg hover:bg-slate-50 transition-colors duration-200 flex items-center gap-3">
-                    <span>🏠</span> ראשי
+                <button onclick="navigate('overview')" id="nav-overview" class="nav-item active w-full text-right px-4 py-3 rounded-lg transition-colors duration-200 flex items-center gap-3">
+                    <span>🏠</span> ראשי והנחיות
                 </button>
-                <button onclick="navigate('team')" id="nav-team" class="nav-item w-full text-right px-4 py-3 rounded-lg hover:bg-slate-50 transition-colors duration-200 flex items-center gap-3">
+                <button onclick="navigate('team')" id="nav-team" class="nav-item w-full text-right px-4 py-3 rounded-lg transition-colors duration-200 flex items-center gap-3">
                     <span>🎭</span> הדמויות שלנו
                 </button>
-                <button onclick="navigate('mission')" id="nav-mission" class="nav-item w-full text-right px-4 py-3 rounded-lg hover:bg-slate-50 transition-colors duration-200 flex items-center gap-3">
-                    <span>👾</span> משימה 1: מפלצת בכיס
+                <button onclick="navigate('mission')" id="nav-mission" class="nav-item w-full text-right px-4 py-3 rounded-lg transition-colors duration-200 flex items-center gap-3">
+                    <span>⏳</span> פרויקט כרונוס
                 </button>
-                <button onclick="navigate('checklist')" id="nav-checklist" class="nav-item w-full text-right px-4 py-3 rounded-lg hover:bg-slate-50 transition-colors duration-200 flex items-center gap-3">
-                    <span>✅</span> צ'ק ליסט התקדמות
+                <button onclick="navigate('checklist')" id="nav-checklist" class="nav-item w-full text-right px-4 py-3 rounded-lg transition-colors duration-200 flex items-center gap-3">
+                    <span>✅</span> צ'ק ליסט הגשה
                 </button>
             </nav>
         </div>
         
         <div class="p-4 bg-slate-50 text-center text-xs text-slate-400 border-t">
-            גרסה 1.2 <br> מבוסס על מסמך אפיון
+            גרסה 2.0 Junior <br> מותאם לכיתה י"ב
         </div>
     </aside>
 
@@ -115,161 +123,155 @@
         // --- DATA STORE ---
         const appData = {
             overview: {
-                title: "ברוכים הבאים ל-Java Genie",
-                subtitle: "מנטור וירטואלי לתלמידי מגמת אנדרואיד (5 יח\"ל)",
-                intro: "פרויקט הגמר באנדרואיד יכול להיות מלחיץ. באגים, קריסות, והדד-ליין שמתקרב... בדיוק בשביל זה אני כאן. אני מלווה אותך צעד אחר צעד: מרעיון ועד לספר הפרויקט.",
-                features: [
-                    { icon: "🎓", title: "ליווי אישי", desc: "הכוונה צמודה בכתיבת הקוד והתגברות על תקלות." },
-                    { icon: "📚", title: "ספר פרויקט", desc: "עזרה בניסוח וכתיבת התיעוד הנדרש לבגרות." },
-                    { icon: "⚖️", title: "איזון רגשי", desc: "שילוב של תמיכה אופטימית וריאליזם פסימי." }
-                ]
+                title: "ברוכים הבאים ל-Java Genie Junior",
+                subtitle: "הבוט שילווה אתכם בדרך לבגרות באנדרואיד",
+                intro: "הכירו את העוזר האישי החדש שלכם. ה-Genie Junior הוא בוט מבוסס AI שנבנה במיוחד כדי לעזור לכם במשימות הכיתה ובפרויקט הגמר.",
+                role_cards: [
+                    { title: "🐞 תיקון באגים", desc: "האפליקציה קרסה? העתיקו את השגיאה מה-Logcat לבוט והוא יסביר לכם בעברית פשוטה מה הבעיה ואיך לתקן." },
+                    { title: "🧠 הבנת מושגים", desc: "לא הבנתם מה זה Intent או למה צריך SharedPrefs? הבוט יסביר עם דוגמאות פשוטות מחיי היום-יום." },
+                    { title: "🏗️ סיוע בבנייה", desc: "נתקעתם בכתיבת הקוד? הבוט ייתן רמזים, יציג דוגמאות קוד (Snippets) ויכוון אתכם לפתרון." }
+                ],
+                how_to_use: {
+                    title: "איך משתמשים בבוט?",
+                    steps: [
+                        "1. היכנסו ל-Google Classroom הכיתתי של מגמת אנדרואיד.",
+                        "2. עברו ללשונית 'עבודת כיתה' (Classwork).",
+                        "3. חפשו את הקישור: 'Java Genie Junior - העוזר האישי שלכם'.",
+                        "4. לחצו על הקישור והתחילו להתכתב! שאלו כל שאלה שעולה לכם בזמן העבודה."
+                    ]
+                }
             },
             team: {
                 title: "הצוות שלך: הקולות בראש",
-                intro: "כדי לתת חוויה ריאליסטית, הליווי מתבצע על ידי שתי דמויות מנוגדות. האחת דוחפת קדימה, והשנייה מכינה אותך לנפילה.",
+                intro: "כדי לתת חוויה ריאליסטית, הליווי מתבצע על ידי שתי דמויות מנוגדות. בחרו למי להקשיב ברגעי משבר.",
                 bummer: {
                     name: "המבאס (The Bummer)",
                     role: "הריאליסט הפסימי",
-                    desc: "הוא יודע שהאמולטור ייתקע וששכחת נקודה-פסיק. מבחינתו, כל שורה שכתבת היא באג בפוטנציה.",
-                    quote: "בטח המפלצת שלך תמות מרעב כי ה-Activity יקרוס ב-Rotation. קלאסי."
+                    desc: "הוא בטוח שהאמולטור ייתקע וששכחתם נקודה-פסיק. מבחינתו, כל שורה שכתבתם היא באג שמחכה לקרות.",
+                    quote: "בטח תשתמשו ב-ConstrainLayout ותעיפו את הכפתור מחוץ למסך. קלאסי."
                 },
                 smiley: {
                     name: "סמיילי פייס (Smiley Face)",
                     role: "המעודד הנצחי",
-                    desc: "רואה בכל שגיאה הזדמנות ללמוד. הוא זה שידחוף אותך להמשיך כשבא לך לשבור את המקלדת.",
+                    desc: "רואה בכל שגיאה (Exception) הזדמנות ללמוד משהו חדש. הוא זה שידחוף אתכם להמשיך גם כשהכל אדום.",
                     quote: "היי! קרסה האפליקציה? מעולה! זה אומר שאנחנו מאתגרים את המערכת!"
                 }
             },
             mission: {
-                title: "המשימה: המפלצת בכיס שלי (Pocket Monster)",
-                intro: "נבנה אפליקציית 'טמגוצ'י' בסיסית. למה? כי אם לא נדע לשמור נתונים, המפלצת שלנו 'תברח' (תתאפס) בכל פעם שנסגור את האפליקציה. יש פה סיבה אמיתית ללמוד Shared Preferences!",
+                title: "המשימה: פרויקט כרונוס (קפסולת הזמן)",
+                intro: "ברוכים הבאים לתרגול המעשי הראשון. אנחנו לא סתם כותבים קוד, אנחנו בונים את 'כספת הזמן' הראשונה שלכם.",
+                backstory: {
+                    title: "סיפור הרקע: המסר לעתיד",
+                    content: "שנת 2035. האינטרנט קרס, וכל המידע בעולם נמחק. רק מכשירים בודדים שרדו עם מידע שנשמר מקומית בצורה מאובטחת. המשימה שלכם: לבנות אפליקציה שתשמש כ'קפסולת זמן'. המשתמש צריך להקליד מסר סודי לעצמו העתידי ולנעול אותו בכספת. האתגר? המסר חייב לשרוד גם אם הסוללה נגמרת או האפליקציה נסגרת. אם לא תשתמשו נכון בזיכרון המכשיר - המסר יאבד לנצח.",
+                    img_desc: ""
+                },
                 steps: [
                     {
                         id: 1,
-                        title: "שלב 1: מרכז האימוץ (UI)",
-                        goal: "בניית מסך הראשי שבו 'מאמצים' את המפלצת (נותנים לה שם).",
+                        title: "שלב 1: עיצוב הכספת (UI)",
+                        goal: "בניית ממשק המשתמש שבו כותבים את המסר הסודי.",
                         tasks: [
-                            "צרו פרויקט חדש (Empty Activity).",
-                            "ב-XML: צרו EditText (שם המפלצת), Button (אמץ אותי), ו-ImageView (תמונה של המפלצת).",
-                            "ב-Java: השתמשו ב-findViewById כדי לקשר את הרכיבים.",
-                            "צרו OnClickListener לכפתור שבודק אם הוזן שם."
+                            "פתחו את Android Studio וצרו פרויקט חדש מסוג <b>Empty Views Activity</b>.",
+                            "בעיצוב (XML): הוסיפו EditText (לכתיבת המסר), וכפתור Button עם הטקסט 'נעל בכספת'.",
+                            "הוסיפו ImageView של מנעול כדי לאווירה.",
+                            "ב-Java: בצעו 'Binding' (קישור) בעזרת findViewById לכל הרכיבים."
                         ],
-                        bummerQuote: "רק אל תקראו ל-ID של התמונה 'imageView1'. כשתהיו מתכנתים אמיתיים זה ירדוף אתכם. תקראו לזה 'imgMonsterAvatar'.",
-                        smileyQuote: "איזה רגע מרגש! ברגע שתשימו תמונה של דרקון או חתול, האפליקציה תקבל חיים. זה כבר לא סתם קוד!"
+                        bummerQuote: "שימו לב שבחרתם Empty Views Activity ולא משהו עתיק. ואל תשכחו ID לרכיבים, אחרת הג'אווה שלכם תהיה עיוורת.",
+                        smileyQuote: "המסך הראשון שלכם! ברגע שתריצו ותראו את הכפתור והתיבה על הטלפון, תרגישו כמו האקרים אמיתיים."
                     },
                     {
                         id: 2,
-                        title: "שלב 2: הזיכרון (Don't Forget Me)",
-                        goal: "למנוע מהמפלצת 'לברוח'. חייבים לשמור את השם שלה בזיכרון המכשיר.",
+                        title: "שלב 2: מנגנון הנעילה (Storage)",
+                        goal: "לשמור את המסר בזיכרון כך שלא יימחק בסגירת האפליקציה.",
                         tasks: [
-                            "הוסיפו שימוש ב-SharedPreferences.",
-                            "בשמירה: בלחיצה על 'אמץ', שמרו את שם המפלצת בזיכרון (commit/apply).",
-                            "בטעינה (onCreate): בדקו האם כבר שמורה מפלצת? אם כן, שנו את כפתור האימוץ ל'המשך לשחק עם [שם]'."
+                            "צרו מנגנון SharedPreferences (הזיכרון של הכספת).",
+                            "בלחיצה על הכפתור: קחו את הטקסט, שימרו אותו ב-SharedPrefs ובצעו <b>commit</b>.",
+                            "בפתיחת האפליקציה (onCreate): בדקו אם יש מסר שמור? אם כן, הציגו הודעה 'הכספת נעולה ומכילה מידע'.",
                         ],
-                        bummerQuote: "אני שם כסף ששכחתם לעשות commit או apply. תפתחו את האפליקציה מחדש - המפלצת נעלמה, נכון? אמרתי לכם.",
-                        smileyQuote: "זה הקסם האמיתי! עכשיו המפלצת שלכם חיה בתוך הטלפון גם כשהמסך כבוי. יצרתם זיכרון דיגיטלי!"
+                        bummerQuote: "אם תשכחו לעשות apply או commit, המסר ייעלם כאילו לא היה. ואז ב-2035 תפתחו כספת ריקה. מביך.",
+                        smileyQuote: "זה הרגע הקריטי! אתם מלמדים את הטלפון 'לזכור'. זה הבסיס לכל אפליקציה שתבנו בעתיד!"
                     },
                     {
                         id: 3,
-                        title: "שלב 3: חדר המשחקים (Intents)",
-                        goal: "מעבר למסך שבו באמת משחקים עם המפלצת.",
+                        title: "שלב 3: חדר הסודות (Intents)",
+                        goal: "יצירת מסך נפרד ומוגן לצפייה במסר שנשמר.",
                         tasks: [
-                            "צרו Activity חדש (GameActivity).",
-                            "השתמשו ב-Intent כדי לעבור ממסך האימוץ למסך המשחק.",
-                            "העבירו את שם המפלצת למסך השני (putExtra) והציגו אותו בכותרת: 'החדר של [שם]'.",
-                            "בונוס: כפתור 'האכלה' שמעדכן מונה."
+                            "צרו Activity חדש בשם SecretActivity.",
+                            "במסך הראשי, אם יש מסר שמור, הוסיפו כפתור 'פתח כספת' שמעביר ל-Activity החדש (Intent).",
+                            "במסך הסוד: שלפו את המידע מה-SharedPrefs והציגו אותו ב-TextView גדול.",
                         ],
-                        bummerQuote: "אל תשכחו להוסיף את ה-Activity ל-Manifest. אחרת האפליקציה תקרוס והמפלצת תישאר לבד בחושך.",
-                        smileyQuote: "דמיינו את זה: השם שבחרתם עובר בין המסכים! הנתונים זורמים באפליקציה כמו דם בגוף. אתם בונים מערכת חיה!"
+                        bummerQuote: "אל תשכחו להצהיר על ה-Activity החדש ב-Manifest, אחרת האפליקציה תרסק את עצמה לדעת.",
+                        smileyQuote: "דמיינו את המעבר הזה: קליק אחד, ואתם בתוך החדר הסודי שרק אתם יצרתם. איזה סיפוק!"
                     }
                 ]
             },
             checklist: {
-                title: "צ'ק ליסט: האם המפלצת שרדה?",
-                intro: "לפני שממשיכים, בואו נבדוק שהקוד שלכם יציב והמפלצת שמחה.",
+                title: "צ'ק ליסט הגשה: האם הכספת עמידה?",
+                intro: "לפני שמגישים למורה, בואו נראה שהקפסולה שלכם מוכנה לשיגור לעתיד.",
                 items: [
-                    { id: "c1", text: "האפליקציה עולה והתמונה של המפלצת מופיעה", checked: false },
-                    { id: "c2", text: "הזנתם שם, לחצתם 'אמץ', והוא נשמר", checked: false },
-                    { id: "c3", text: "סגרתם את האפליקציה לגמרי (Kill Process) - כשפתחתם, השם עדיין שם?", checked: false },
-                    { id: "c4", text: "יש מעבר תקין ל'חדר המשחקים' (Activity 2)", checked: false },
-                    { id: "c5", text: "שם המפלצת מופיע נכון בחדר המשחקים (Intent Extras)", checked: false }
+                    { id: "c1", text: "הפרויקט נוצר כ-Empty Views Activity והוא רץ ללא שגיאות", checked: false },
+                    { id: "c2", text: "יש שדה טקסט וכפתור 'נעילה' שעובד", checked: false },
+                    { id: "c3", text: "לאחר סגירת האפליקציה ופתיחה מחדש - המידע נשמר? (Persistence)", checked: false },
+                    { id: "c4", text: "קיים מעבר תקין למסך הסודות (Activity 2)", checked: false },
+                    { id: "c5", text: "המסר הסודי מוצג נכון במסך השני", checked: false }
                 ]
             }
         };
 
-        let currentTab = 0; // For Mission steps
-        let currentPersonaView = 'smiley'; // For feedback toggle
+        let currentTab = -1; // -1 for Backstory, 0-2 for Steps
+        let currentPersonaView = 'smiley'; 
 
         // --- CORE NAVIGATION ---
         function navigate(viewId) {
-            // Update active state in sidebar
             document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
             document.getElementById(`nav-${viewId}`).classList.add('active');
 
-            // Render content
             const contentDiv = document.getElementById('content-area');
-            contentDiv.innerHTML = ''; // Clear current content
+            contentDiv.innerHTML = ''; 
             
-            // Destroy old charts to prevent memory leaks/overlays
             Chart.helpers.each(Chart.instances, function (instance) {
                 instance.destroy();
             });
 
             switch (viewId) {
-                case 'overview':
-                    renderOverview(contentDiv);
-                    break;
-                case 'team':
-                    renderTeam(contentDiv);
-                    break;
-                case 'mission':
-                    renderMission(contentDiv);
-                    break;
-                case 'checklist':
-                    renderChecklist(contentDiv);
-                    break;
+                case 'overview': renderOverview(contentDiv); break;
+                case 'team': renderTeam(contentDiv); break;
+                case 'mission': renderMission(contentDiv); break;
+                case 'checklist': renderChecklist(contentDiv); break;
             }
         }
 
         // --- RENDER FUNCTIONS ---
 
         function renderOverview(container) {
+            const d = appData.overview;
             container.innerHTML = `
-                <div class="bg-white rounded-2xl shadow-sm p-8 border-t-4 border-emerald-500 animate-fade-in">
-                    <h2 class="text-3xl font-bold text-slate-800 mb-2">${appData.overview.title}</h2>
-                    <h3 class="text-xl text-emerald-600 mb-6">${appData.overview.subtitle}</h3>
-                    <p class="text-slate-600 text-lg leading-relaxed mb-8">${appData.overview.intro}</p>
+                <div class="bg-white rounded-2xl shadow-sm p-8 border-t-4 border-sky-500 animate-fade-in">
+                    <h2 class="text-3xl font-bold text-slate-800 mb-2">${d.title}</h2>
+                    <h3 class="text-xl text-sky-600 mb-6">${d.subtitle}</h3>
+                    <p class="text-slate-600 text-lg leading-relaxed mb-8">${d.intro}</p>
                     
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        ${appData.overview.features.map(f => `
-                            <div class="bg-slate-50 p-6 rounded-xl border border-slate-100 text-center hover:shadow-md transition-shadow">
-                                <div class="text-4xl mb-3">${f.icon}</div>
-                                <h4 class="font-bold text-slate-700 mb-2">${f.title}</h4>
-                                <p class="text-sm text-slate-500">${f.desc}</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                        ${d.role_cards.map(c => `
+                            <div class="bg-sky-50 p-6 rounded-xl border border-sky-100 text-center hover:shadow-md transition-shadow">
+                                <h4 class="font-bold text-sky-800 text-lg mb-2">${c.title}</h4>
+                                <p class="text-sm text-slate-600">${c.desc}</p>
                             </div>
                         `).join('')}
                     </div>
-                </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="bg-white rounded-2xl shadow-sm p-6">
-                        <h4 class="font-bold text-slate-700 mb-4 border-b pb-2">רמת קושי צפויה</h4>
-                        <div class="chart-container">
-                            <canvas id="complexityChart"></canvas>
-                        </div>
-                    </div>
-                    <div class="bg-emerald-600 text-white rounded-2xl shadow-sm p-8 flex flex-col justify-center items-center text-center">
-                        <div class="text-6xl mb-4">👾</div>
-                        <h3 class="text-2xl font-bold mb-2">מוכנים לאמץ?</h3>
-                        <p class="mb-6 opacity-90">הפרויקט הראשון שלכם: 'המפלצת בכיס'. בואו ניתן לה חיים!</p>
-                        <button onclick="navigate('mission')" class="bg-white text-emerald-700 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-emerald-50 transition transform hover:-translate-y-1">
-                            התחל משימה 1
-                        </button>
+                    <div class="bg-slate-800 text-white rounded-xl p-8 shadow-lg">
+                        <h3 class="text-2xl font-bold text-sky-400 mb-4 border-b border-slate-600 pb-2">${d.how_to_use.title}</h3>
+                        <ul class="space-y-4">
+                            ${d.how_to_use.steps.map(s => `
+                                <li class="flex items-center gap-3 text-lg">
+                                    <span class="text-sky-400">➜</span> ${s}
+                                </li>
+                            `).join('')}
+                        </ul>
                     </div>
                 </div>
             `;
-
-            initComplexityChart();
         }
 
         function renderTeam(container) {
@@ -317,20 +319,115 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="bg-white rounded-2xl shadow-sm p-6">
-                    <h3 class="font-bold text-slate-700 mb-4 text-center">איזון רגשי בלווי הפרויקט</h3>
-                    <div class="chart-container">
-                        <canvas id="personaChart"></canvas>
-                    </div>
-                </div>
             `;
-            initPersonaChart();
         }
 
         function renderMission(container) {
             const data = appData.mission;
-            const step = data.steps[currentTab];
+            
+            // Build Tabs HTML
+            let tabsHtml = `
+                <button onclick="setTab(-1)" class="tab-btn ${currentTab === -1 ? 'active' : 'inactive'} px-6 py-3 rounded-xl font-bold transition-all duration-200 flex items-center gap-2">
+                    📖 סיפור הרקע
+                </button>
+            `;
+            
+            data.steps.forEach((s, index) => {
+                tabsHtml += `
+                    <button onclick="setTab(${index})" class="tab-btn ${currentTab === index ? 'active' : 'inactive'} px-6 py-3 rounded-xl font-bold transition-all duration-200">
+                        ${s.title}
+                    </button>
+                `;
+            });
+
+            // Decide content based on tab
+            let contentHtml = '';
+            
+            if (currentTab === -1) {
+                // Backstory Tab
+                contentHtml = `
+                    <div class="bg-slate-900 text-white rounded-2xl shadow-xl p-8 lg:p-12 animate-fade-in relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-sky-500 to-purple-500"></div>
+                        <div class="relative z-10">
+                            <h2 class="text-4xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-purple-300">${data.backstory.title}</h2>
+                            <p class="text-xl leading-8 text-slate-300 mb-8 max-w-3xl border-r-4 border-sky-500 pr-6">
+                                ${data.backstory.content}
+                            </p>
+                            <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 flex flex-col md:flex-row items-center gap-6">
+                                <div class="text-5xl">🔐</div>
+                                <div>
+                                    <h3 class="font-bold text-sky-400 text-lg">המטרה האסטרטגית</h3>
+                                    <p class="text-slate-400">ללמוד לשמור מידע (Persistence) ולנווט בין מסכים מאובטחים. גורל המידע בידיים שלכם.</p>
+                                </div>
+                                <button onclick="setTab(0)" class="mr-auto bg-sky-600 hover:bg-sky-500 text-white font-bold py-3 px-8 rounded-full transition shadow-lg">
+                                    קבל את המשימה ➜
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Decoration -->
+                        <div class="absolute -bottom-20 -left-20 w-64 h-64 bg-sky-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+                        <div class="absolute -top-20 -right-20 w-64 h-64 bg-purple-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+                    </div>
+                `;
+            } else {
+                // Steps Tab
+                const step = data.steps[currentTab];
+                contentHtml = `
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 animate-fade-in">
+                        <!-- Instructions -->
+                        <div class="lg:col-span-2 bg-white rounded-2xl shadow-sm p-8">
+                            <div class="flex items-start justify-between mb-6">
+                                <h3 class="text-2xl font-bold text-slate-800">${step.title}</h3>
+                                <span class="bg-sky-100 text-sky-800 text-xs font-bold px-3 py-1 rounded-full">שלב ${step.id}</span>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <h4 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-2">המטרה</h4>
+                                <p class="text-lg text-slate-700 font-medium">${step.goal}</p>
+                            </div>
+
+                            <div class="bg-slate-50 rounded-xl p-6 border border-slate-100">
+                                <h4 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">הוראות ביצוע</h4>
+                                <ul class="space-y-4">
+                                    ${step.tasks.map(task => `
+                                        <li class="flex items-start gap-3">
+                                            <span class="mt-1 text-sky-500">➜</span>
+                                            <span class="text-slate-700">${task}</span>
+                                        </li>
+                                    `).join('')}
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Mentor Interaction -->
+                        <div class="lg:col-span-1 flex flex-col gap-4">
+                            <div class="bg-white rounded-2xl shadow-sm p-6 flex-1 flex flex-col">
+                                <h4 class="font-bold text-slate-700 mb-4 text-center">פידבק מהצוות</h4>
+                                
+                                <div class="flex bg-slate-100 rounded-lg p-1 mb-6">
+                                    <button onclick="togglePersona('smiley')" class="flex-1 py-2 rounded-md text-sm font-bold transition ${currentPersonaView === 'smiley' ? 'bg-white shadow text-sky-600' : 'text-slate-500 hover:text-slate-700'}">
+                                        😎 אופטימי
+                                    </button>
+                                    <button onclick="togglePersona('bummer')" class="flex-1 py-2 rounded-md text-sm font-bold transition ${currentPersonaView === 'bummer' ? 'bg-white shadow text-gray-600' : 'text-slate-500 hover:text-slate-700'}">
+                                        😒 פסימי
+                                    </button>
+                                </div>
+
+                                <div class="flex-1 flex flex-col items-center justify-center text-center transition-all duration-300" id="mentor-box">
+                                    <div class="text-6xl mb-4 animate-bounce-slow">
+                                        ${currentPersonaView === 'smiley' ? '😎' : '😒'}
+                                    </div>
+                                    <div class="bg-${currentPersonaView === 'smiley' ? 'yellow' : 'gray'}-50 p-4 rounded-xl border border-${currentPersonaView === 'smiley' ? 'yellow' : 'gray'}-100">
+                                        <p class="text-${currentPersonaView === 'smiley' ? 'yellow' : 'gray'}-800 italic">
+                                            "${currentPersonaView === 'smiley' ? step.smileyQuote : step.bummerQuote}"
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
 
             container.innerHTML = `
                 <div class="bg-white rounded-2xl shadow-sm p-6 mb-6">
@@ -338,69 +435,13 @@
                      <p class="text-slate-600">${data.intro}</p>
                 </div>
 
-                <!-- Tabs -->
-                <div class="flex gap-2 overflow-x-auto pb-2 mb-4">
-                    ${data.steps.map((s, index) => `
-                        <button onclick="setTab(${index})" class="whitespace-nowrap px-6 py-3 rounded-xl font-bold transition-all duration-200 ${currentTab === index ? 'bg-emerald-600 text-white shadow-md' : 'bg-white text-slate-600 hover:bg-slate-100'}">
-                            ${s.title}
-                        </button>
-                    `).join('')}
+                <!-- Tabs Navigation -->
+                <div class="flex gap-2 overflow-x-auto pb-4 mb-2">
+                    ${tabsHtml}
                 </div>
 
-                <!-- Active Step Content -->
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 animate-fade-in">
-                    <!-- Instructions -->
-                    <div class="lg:col-span-2 bg-white rounded-2xl shadow-sm p-8">
-                        <div class="flex items-start justify-between mb-6">
-                            <h3 class="text-2xl font-bold text-slate-800">${step.title}</h3>
-                            <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full">שלב ${step.id}</span>
-                        </div>
-                        
-                        <div class="mb-6">
-                            <h4 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-2">המטרה</h4>
-                            <p class="text-lg text-slate-700 font-medium">${step.goal}</p>
-                        </div>
-
-                        <div class="bg-slate-50 rounded-xl p-6 border border-slate-100">
-                            <h4 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">הוראות ביצוע</h4>
-                            <ul class="space-y-4">
-                                ${step.tasks.map(task => `
-                                    <li class="flex items-start gap-3">
-                                        <span class="mt-1 text-emerald-500">➜</span>
-                                        <span class="text-slate-700">${task}</span>
-                                    </li>
-                                `).join('')}
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Mentor Interaction -->
-                    <div class="lg:col-span-1 flex flex-col gap-4">
-                        <div class="bg-white rounded-2xl shadow-sm p-6 flex-1 flex flex-col">
-                            <h4 class="font-bold text-slate-700 mb-4 text-center">התייעץ עם המנטור</h4>
-                            
-                            <div class="flex bg-slate-100 rounded-lg p-1 mb-6">
-                                <button onclick="togglePersona('smiley')" class="flex-1 py-2 rounded-md text-sm font-bold transition ${currentPersonaView === 'smiley' ? 'bg-white shadow text-emerald-600' : 'text-slate-500 hover:text-slate-700'}">
-                                    😎 אופטימי
-                                </button>
-                                <button onclick="togglePersona('bummer')" class="flex-1 py-2 rounded-md text-sm font-bold transition ${currentPersonaView === 'bummer' ? 'bg-white shadow text-gray-600' : 'text-slate-500 hover:text-slate-700'}">
-                                    😒 פסימי
-                                </button>
-                            </div>
-
-                            <div class="flex-1 flex flex-col items-center justify-center text-center transition-all duration-300" id="mentor-box">
-                                <div class="text-6xl mb-4 animate-bounce-slow">
-                                    ${currentPersonaView === 'smiley' ? '😎' : '😒'}
-                                </div>
-                                <div class="bg-${currentPersonaView === 'smiley' ? 'yellow' : 'gray'}-50 p-4 rounded-xl border border-${currentPersonaView === 'smiley' ? 'yellow' : 'gray'}-100">
-                                    <p class="text-${currentPersonaView === 'smiley' ? 'yellow' : 'gray'}-800 italic">
-                                        "${currentPersonaView === 'smiley' ? step.smileyQuote : step.bummerQuote}"
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <!-- Tab Content -->
+                ${contentHtml}
             `;
         }
 
@@ -422,11 +463,11 @@
                         <h3 class="font-bold text-slate-700 mb-6 border-b pb-2">רשימת משימות</h3>
                         <div class="space-y-4">
                             ${data.items.map(item => `
-                                <label class="flex items-center gap-4 p-4 rounded-xl border-2 transition cursor-pointer ${item.checked ? 'border-emerald-500 bg-emerald-50' : 'border-slate-100 hover:border-emerald-200'}">
+                                <label class="flex items-center gap-4 p-4 rounded-xl border-2 transition cursor-pointer ${item.checked ? 'border-sky-500 bg-sky-50' : 'border-slate-100 hover:border-sky-200'}">
                                     <div class="relative flex items-center">
-                                        <input type="checkbox" onchange="toggleCheck('${item.id}')" ${item.checked ? 'checked' : ''} class="w-6 h-6 text-emerald-600 rounded focus:ring-emerald-500 border-gray-300">
+                                        <input type="checkbox" onchange="toggleCheck('${item.id}')" ${item.checked ? 'checked' : ''} class="w-6 h-6 text-sky-600 rounded focus:ring-sky-500 border-gray-300">
                                     </div>
-                                    <span class="text-lg ${item.checked ? 'text-emerald-800 line-through' : 'text-slate-700'}">${item.text}</span>
+                                    <span class="text-lg ${item.checked ? 'text-sky-800 line-through' : 'text-slate-700'}">${item.text}</span>
                                 </label>
                             `).join('')}
                         </div>
@@ -448,10 +489,10 @@
                         </div>
 
                         ${percentage === 100 ? `
-                        <div class="bg-emerald-600 text-white rounded-2xl shadow-lg p-6 text-center animate-pulse">
+                        <div class="bg-sky-600 text-white rounded-2xl shadow-lg p-6 text-center animate-pulse">
                             <div class="text-4xl mb-2">🎉</div>
-                            <h3 class="text-xl font-bold">כל הכבוד!</h3>
-                            <p>המפלצת שלכם חיה וקיימת. חזרו לג'יני לשלבים המתקדמים!</p>
+                            <h3 class="text-xl font-bold">המשימה הושלמה!</h3>
+                            <p>קפסולת הזמן מוכנה. כעת אתם מוכנים לפרויקט הגמר האמיתי.</p>
                         </div>
                         ` : ''}
                     </div>
@@ -481,80 +522,7 @@
         }
 
         // --- CHART CONFIGURATIONS ---
-
-        function initComplexityChart() {
-            const ctx = document.getElementById('complexityChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ['שלב 1: UI אימוץ', 'שלב 2: זיכרון', 'שלב 3: חדר משחק'],
-                    datasets: [{
-                        label: 'רמת מורכבות',
-                        data: [20, 50, 80],
-                        borderColor: '#10b981', // Emerald 500
-                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
-                        borderWidth: 3,
-                        tension: 0.4,
-                        fill: true,
-                        pointBackgroundColor: '#ffffff',
-                        pointBorderColor: '#059669',
-                        pointRadius: 6
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false },
-                        tooltip: { 
-                            callbacks: {
-                                label: (ctx) => `קושי: ${ctx.raw}%`
-                            }
-                        }
-                    },
-                    scales: {
-                        y: { beginAtZero: true, max: 100, display: false },
-                        x: { grid: { display: false } }
-                    }
-                }
-            });
-        }
-
-        function initPersonaChart() {
-            const ctx = document.getElementById('personaChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['תמיכה רגשית', 'בדיקת מציאות', 'דחיפה לפעולה', 'ניהול סיכונים'],
-                    datasets: [
-                        {
-                            label: 'סמיילי (אופטימי)',
-                            data: [90, 20, 95, 10],
-                            backgroundColor: '#fbbf24', // Amber 400
-                            borderRadius: 6
-                        },
-                        {
-                            label: 'המבאס (פסימי)',
-                            data: [10, 95, 30, 90],
-                            backgroundColor: '#9ca3af', // Gray 400
-                            borderRadius: 6
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { position: 'bottom' }
-                    },
-                    scales: {
-                        y: { beginAtZero: true, max: 100 },
-                        x: { grid: { display: false } }
-                    }
-                }
-            });
-        }
-
+        
         function initProgressChart(done, remaining) {
             const ctx = document.getElementById('progressChart').getContext('2d');
             new Chart(ctx, {
@@ -563,7 +531,7 @@
                     labels: ['הושלם', 'נותר'],
                     datasets: [{
                         data: [done, remaining],
-                        backgroundColor: ['#10b981', '#e2e8f0'], // Emerald 500, Slate 200
+                        backgroundColor: ['#0ea5e9', '#e2e8f0'], // Sky 500, Slate 200
                         borderWidth: 0,
                         hoverOffset: 4
                     }]
