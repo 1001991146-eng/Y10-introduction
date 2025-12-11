@@ -90,7 +90,7 @@
                     <span>🎭</span> הדמויות שלנו
                 </button>
                 <button onclick="navigate('mission')" id="nav-mission" class="nav-item w-full text-right px-4 py-3 rounded-lg hover:bg-slate-50 transition-colors duration-200 flex items-center gap-3">
-                    <span>📱</span> המשימה: יישום מתגלגל
+                    <span>👾</span> משימה 1: מפלצת בכיס
                 </button>
                 <button onclick="navigate('checklist')" id="nav-checklist" class="nav-item w-full text-right px-4 py-3 rounded-lg hover:bg-slate-50 transition-colors duration-200 flex items-center gap-3">
                     <span>✅</span> צ'ק ליסט התקדמות
@@ -99,7 +99,7 @@
         </div>
         
         <div class="p-4 bg-slate-50 text-center text-xs text-slate-400 border-t">
-            גרסה 1.0 <br> מבוסס על מסמך אפיון
+            גרסה 1.2 <br> מבוסס על מסמך אפיון
         </div>
     </aside>
 
@@ -130,68 +130,69 @@
                 bummer: {
                     name: "המבאס (The Bummer)",
                     role: "הריאליסט הפסימי",
-                    desc: "הוא יודע שהאמולטור ייתקע ושה-Gradle יכשל. הוא נותן לגיטימציה לתסכול שלך.",
-                    quote: "בטח שכחת להוסיף הרשאות ל-Manifest, אה? קלאסי."
+                    desc: "הוא יודע שהאמולטור ייתקע וששכחת נקודה-פסיק. מבחינתו, כל שורה שכתבת היא באג בפוטנציה.",
+                    quote: "בטח המפלצת שלך תמות מרעב כי ה-Activity יקרוס ב-Rotation. קלאסי."
                 },
                 smiley: {
                     name: "סמיילי פייס (Smiley Face)",
                     role: "המעודד הנצחי",
                     desc: "רואה בכל שגיאה הזדמנות ללמוד. הוא זה שידחוף אותך להמשיך כשבא לך לשבור את המקלדת.",
-                    quote: "היי! קרסה האפליקציה? מעולה! זה אומר שאנחנו מתקדמים."
+                    quote: "היי! קרסה האפליקציה? מעולה! זה אומר שאנחנו מאתגרים את המערכת!"
                 }
             },
             mission: {
-                title: "המשימה הראשונה: היישום המתגלגל",
-                intro: "אנחנו לא מתחילים מהפיצ'ר הכי מסובך. המטרה היא לבנות 'אפליקציה מתגלגלת' - בסיס פשוט שעליו נלביש את הפרויקט הגדול.",
+                title: "המשימה: המפלצת בכיס שלי (Pocket Monster)",
+                intro: "נבנה אפליקציית 'טמגוצ'י' בסיסית. למה? כי אם לא נדע לשמור נתונים, המפלצת שלנו 'תברח' (תתאפס) בכל פעם שנסגור את האפליקציה. יש פה סיבה אמיתית ללמוד Shared Preferences!",
                 steps: [
                     {
                         id: 1,
-                        title: "שלב 1: בדיקת סביבה ו-Views",
-                        goal: "לוודא שה-Android Studio לא קורס ושיש חיבור בין XML ל-Java.",
+                        title: "שלב 1: מרכז האימוץ (UI)",
+                        goal: "בניית מסך הראשי שבו 'מאמצים' את המפלצת (נותנים לה שם).",
                         tasks: [
                             "צרו פרויקט חדש (Empty Activity).",
-                            "ב-activity_main.xml צרו EditText, Button, TextView.",
-                            "ב-MainActivity.java השתמשו ב-findViewById.",
-                            "צרו OnClickListener לכפתור המציג את הטקסט ב-TextView."
+                            "ב-XML: צרו EditText (שם המפלצת), Button (אמץ אותי), ו-ImageView (תמונה של המפלצת).",
+                            "ב-Java: השתמשו ב-findViewById כדי לקשר את הרכיבים.",
+                            "צרו OnClickListener לכפתור שבודק אם הוזן שם."
                         ],
-                        bummerQuote: "רק אל תקראו לכפתור button1, תשקיעו ב-ID נורמלי כמו btnSave. אתם תודו לי אחר כך כשהקוד שלכם יראה כמו ספגטי.",
-                        smileyQuote: "איזה כיף! ברגע שתראו את השם שלכם מופיע על המסך, תרגישו כמו קוסמים. יאללה, לקודד!"
+                        bummerQuote: "רק אל תקראו ל-ID של התמונה 'imageView1'. כשתהיו מתכנתים אמיתיים זה ירדוף אתכם. תקראו לזה 'imgMonsterAvatar'.",
+                        smileyQuote: "איזה רגע מרגש! ברגע שתשימו תמונה של דרקון או חתול, האפליקציה תקבל חיים. זה כבר לא סתם קוד!"
                     },
                     {
                         id: 2,
-                        title: "שלב 2: זיכרון (SharedPreferences)",
-                        goal: "המשתמש יצא מהאפליקציה? אנחנו רוצים לזכור מי הוא היה.",
+                        title: "שלב 2: הזיכרון (Don't Forget Me)",
+                        goal: "למנוע מהמפלצת 'לברוח'. חייבים לשמור את השם שלה בזיכרון המכשיר.",
                         tasks: [
-                            "הוסיפו מחלקה לטיפול ב-SharedPreferences.",
-                            "בשמירה: בתוך ה-Listener, שמרו את השם בזיכרון (commit/apply).",
-                            "בשליפה: ב-onCreate, בדקו אם יש שם שמור והציגו אותו מיד."
+                            "הוסיפו שימוש ב-SharedPreferences.",
+                            "בשמירה: בלחיצה על 'אמץ', שמרו את שם המפלצת בזיכרון (commit/apply).",
+                            "בטעינה (onCreate): בדקו האם כבר שמורה מפלצת? אם כן, שנו את כפתור האימוץ ל'המשך לשחק עם [שם]'."
                         ],
-                        bummerQuote: "אני שם כסף ששכחתם לעשות commit או apply והנתונים פשוט נעלמו לאוויר. תבדקו שוב.",
-                        smileyQuote: "זה הרגע שבו האפליקציה הופכת לחכמה! היא זוכרת את המשתמש. זה הבסיס לכל אפליקציה גדולה."
+                        bummerQuote: "אני שם כסף ששכחתם לעשות commit או apply. תפתחו את האפליקציה מחדש - המפלצת נעלמה, נכון? אמרתי לכם.",
+                        smileyQuote: "זה הקסם האמיתי! עכשיו המפלצת שלכם חיה בתוך הטלפון גם כשהמסך כבוי. יצרתם זיכרון דיגיטלי!"
                     },
                     {
                         id: 3,
-                        title: "שלב 3: מעבר בין מסכים (Intents)",
-                        goal: "אפליקציה עם מסך אחד זה משעמם. בואו נלמד לעבור דירה.",
+                        title: "שלב 3: חדר המשחקים (Intents)",
+                        goal: "מעבר למסך שבו באמת משחקים עם המפלצת.",
                         tasks: [
-                            "צרו Activity חדש (למשל HomeActivity).",
-                            "לאחר שמירה מוצלחת, השתמשו ב-Intent למעבר מסך.",
-                            "בונוס: אפשרו מעבר רק אם הסיסמה תואמת למה שנשמר."
+                            "צרו Activity חדש (GameActivity).",
+                            "השתמשו ב-Intent כדי לעבור ממסך האימוץ למסך המשחק.",
+                            "העבירו את שם המפלצת למסך השני (putExtra) והציגו אותו בכותרת: 'החדר של [שם]'.",
+                            "בונוס: כפתור 'האכלה' שמעדכן מונה."
                         ],
-                        bummerQuote: "אל תשכחו להוסיף את ה-Activity החדש ל-AndroidManifest.xml, אחרת האפליקציה תקרוס ותבכו לי.",
-                        smileyQuote: "דמיינו את זה: המשתמש נרשם, לוחץ, ובום! עובר למשחק המטורף שתבנו."
+                        bummerQuote: "אל תשכחו להוסיף את ה-Activity ל-Manifest. אחרת האפליקציה תקרוס והמפלצת תישאר לבד בחושך.",
+                        smileyQuote: "דמיינו את זה: השם שבחרתם עובר בין המסכים! הנתונים זורמים באפליקציה כמו דם בגוף. אתם בונים מערכת חיה!"
                     }
                 ]
             },
             checklist: {
-                title: "צ'ק ליסט לסיום המשימה",
-                intro: "לפני שממשיכים, חייבים לוודא שהכל עובד. ה-V הזה חשוב גם לספר הפרויקט שלכם!",
+                title: "צ'ק ליסט: האם המפלצת שרדה?",
+                intro: "לפני שממשיכים, בואו נבדוק שהקוד שלכם יציב והמפלצת שמחה.",
                 items: [
-                    { id: "c1", text: "האפליקציה רצה על האמולטור/מכשיר פיזי", checked: false },
-                    { id: "c2", text: "הכנסתם שם, לחצתם, והוא הופיע", checked: false },
-                    { id: "c3", text: "לאחר סגירה מלאה (Kill) ופתיחה מחדש - השם הופיע לבד", checked: false },
-                    { id: "c4", text: "קיים מעבר תקין למסך שני", checked: false },
-                    { id: "c5", text: "הקוד מסודר עם הערות (Documentation)", checked: false }
+                    { id: "c1", text: "האפליקציה עולה והתמונה של המפלצת מופיעה", checked: false },
+                    { id: "c2", text: "הזנתם שם, לחצתם 'אמץ', והוא נשמר", checked: false },
+                    { id: "c3", text: "סגרתם את האפליקציה לגמרי (Kill Process) - כשפתחתם, השם עדיין שם?", checked: false },
+                    { id: "c4", text: "יש מעבר תקין ל'חדר המשחקים' (Activity 2)", checked: false },
+                    { id: "c5", text: "שם המפלצת מופיע נכון בחדר המשחקים (Intent Extras)", checked: false }
                 ]
             }
         };
@@ -258,11 +259,11 @@
                         </div>
                     </div>
                     <div class="bg-emerald-600 text-white rounded-2xl shadow-sm p-8 flex flex-col justify-center items-center text-center">
-                        <div class="text-6xl mb-4">🚀</div>
-                        <h3 class="text-2xl font-bold mb-2">מוכנים להתחיל?</h3>
-                        <p class="mb-6 opacity-90">הצעד הראשון לפרויקט 5 יח"ל מתחיל ב"יישום המתגלגל".</p>
+                        <div class="text-6xl mb-4">👾</div>
+                        <h3 class="text-2xl font-bold mb-2">מוכנים לאמץ?</h3>
+                        <p class="mb-6 opacity-90">הפרויקט הראשון שלכם: 'המפלצת בכיס'. בואו ניתן לה חיים!</p>
                         <button onclick="navigate('mission')" class="bg-white text-emerald-700 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-emerald-50 transition transform hover:-translate-y-1">
-                            בואו נתחיל לבנות
+                            התחל משימה 1
                         </button>
                     </div>
                 </div>
@@ -450,7 +451,7 @@
                         <div class="bg-emerald-600 text-white rounded-2xl shadow-lg p-6 text-center animate-pulse">
                             <div class="text-4xl mb-2">🎉</div>
                             <h3 class="text-xl font-bold">כל הכבוד!</h3>
-                            <p>סיימתם את היישום המתגלגל. חזרו לג'יני לשלב הבא!</p>
+                            <p>המפלצת שלכם חיה וקיימת. חזרו לג'יני לשלבים המתקדמים!</p>
                         </div>
                         ` : ''}
                     </div>
@@ -486,7 +487,7 @@
             new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: ['שלב 1: Views', 'שלב 2: Storage', 'שלב 3: Intents'],
+                    labels: ['שלב 1: UI אימוץ', 'שלב 2: זיכרון', 'שלב 3: חדר משחק'],
                     datasets: [{
                         label: 'רמת מורכבות',
                         data: [20, 50, 80],
