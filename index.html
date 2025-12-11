@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Java Genie Junior - הכיתה שלך</title>
+    <title>Java Genie Junior - הכיתה שלך (י"א)</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -77,7 +77,7 @@
 
     <!-- Placeholder Comments -->
     <!-- Chosen Palette: Junior Edition (Sky Blue/White/Slate) - Friendly, educational, approachable. -->
-    <!-- Application Structure Plan: Dashboard layout. Added "GitHub" section to sidebar and data store. -->
+    <!-- Application Structure Plan: Dashboard layout. Added "Work from Home" (Clone instructions) section. -->
 </head>
 <body class="h-screen flex flex-col md:flex-row overflow-hidden">
 
@@ -87,7 +87,7 @@
             <div class="p-6 border-b border-gray-100 flex items-center justify-center flex-col bg-sky-50">
                 <div class="text-5xl mb-2">🤖</div>
                 <h1 class="text-xl font-bold text-sky-900 tracking-tight text-center">Java Genie <span class="text-sky-500">Junior</span></h1>
-                <p class="text-xs text-sky-600 font-medium">עוזר אישי לפיתוח אפליקציות</p>
+                <p class="text-xs text-sky-600 font-medium">הצעד הראשון באנדרואיד</p>
             </div>
             
             <nav class="mt-6 flex flex-col gap-1 p-2">
@@ -103,6 +103,9 @@
                 <button onclick="navigate('github')" id="nav-github" class="nav-item w-full text-right px-4 py-3 rounded-lg transition-colors duration-200 flex items-center gap-3">
                     <span>🐙</span> גיבוי ב-GitHub
                 </button>
+                <button onclick="navigate('home_work')" id="nav-home_work" class="nav-item w-full text-right px-4 py-3 rounded-lg transition-colors duration-200 flex items-center gap-3">
+                    <span>💻</span> עבודה מהבית
+                </button>
                 <button onclick="navigate('checklist')" id="nav-checklist" class="nav-item w-full text-right px-4 py-3 rounded-lg transition-colors duration-200 flex items-center gap-3">
                     <span>✅</span> צ'ק ליסט הגשה
                 </button>
@@ -110,7 +113,7 @@
         </div>
         
         <div class="p-4 bg-slate-50 text-center text-xs text-slate-400 border-t">
-            גרסה 2.1 Junior <br> כולל מדריך Git
+            גרסה 2.2 Junior <br> כולל מדריך Clone
         </div>
     </aside>
 
@@ -127,126 +130,155 @@
         const appData = {
             overview: {
                 title: "ברוכים הבאים ל-Java Genie Junior",
-                subtitle: "הבוט שילווה אתכם בדרך לבגרות באנדרואיד",
-                intro: "הכירו את העוזר האישי החדש שלכם. ה-Genie Junior הוא בוט מבוסס AI שנבנה במיוחד כדי לעזור לכם במשימות הכיתה ובפרויקט הגמר.",
+                subtitle: "הבוט שילווה אתכם בצעדים הראשונים באנדרואיד",
+                intro: "תלמידי י\"א יקרים, הכירו את העוזר האישי החדש שלכם. ה-Genie Junior הוא בוט מבוסס AI שנבנה במיוחד כדי לעזור לכם להבין איך כותבים אפליקציות בפעם הראשונה.",
                 role_cards: [
-                    { title: "🐞 תיקון באגים", desc: "האפליקציה קרסה? העתיקו את השגיאה מה-Logcat לבוט והוא יסביר לכם בעברית פשוטה מה הבעיה ואיך לתקן." },
-                    { title: "🧠 הבנת מושגים", desc: "לא הבנתם מה זה Intent או למה צריך SharedPrefs? הבוט יסביר עם דוגמאות פשוטות מחיי היום-יום." },
-                    { title: "🏗️ סיוע בבנייה", desc: "נתקעתם בכתיבת הקוד? הבוט ייתן רמזים, יציג דוגמאות קוד (Snippets) ויכוון אתכם לפתרון." }
+                    { title: "🐞 תיקון באגים", desc: "האפליקציה קרסה (Crash)? העתיקו את השגיאה האדומה מה-Logcat לבוט והוא יסביר מה השתבש." },
+                    { title: "🧠 הבנת הבסיס", desc: "מה זה Activity? איך מעצבים ב-XML? הבוט יסביר מושגי יסוד בשפה פשוטה וברורה." },
+                    { title: "🏗️ כתיבת קוד ראשון", desc: "לא יודעים איך לקשר כפתור לקוד (Listener)? הבוט יציג דוגמאות קוד בסיסיות לתרגול." }
                 ],
                 how_to_use: {
                     title: "איך משתמשים בבוט?",
                     steps: [
-                        "1. היכנסו ל-Google Classroom הכיתתי של מגמת אנדרואיד.",
+                        "1. היכנסו ל-Google Classroom הכיתתי של כיתה י\"א.",
                         "2. עברו ללשונית 'עבודת כיתה' (Classwork).",
                         "3. חפשו את הקישור: 'Java Genie Junior - העוזר האישי שלכם'.",
-                        "4. לחצו על הקישור והתחילו להתכתב! שאלו כל שאלה שעולה לכם בזמן העבודה."
+                        "4. לחצו על הקישור והתחילו להתכתב! אל תתביישו לשאול שאלות בסיסיות."
                     ]
                 }
             },
             team: {
                 title: "הצוות שלך: הקולות בראש",
-                intro: "כדי לתת חוויה ריאליסטית, הליווי מתבצע על ידי שתי דמויות מנוגדות. בחרו למי להקשיב ברגעי משבר.",
+                intro: "ללמוד לתכנת זה מאתגר. הבוט משתמש בשתי דמויות כדי לעזור לכם להתמודד עם התסכול וההצלחה הראשונה.",
                 bummer: {
                     name: "המבאס (The Bummer)",
                     role: "הריאליסט הפסימי",
-                    desc: "הוא בטוח שהאמולטור ייתקע וששכחתם נקודה-פסיק. מבחינתו, כל שורה שכתבתם היא באג שמחכה לקרות.",
-                    quote: "בטח תשתמשו ב-ConstrainLayout ותעיפו את הכפתור מחוץ למסך. קלאסי."
+                    desc: "הוא בטוח שתשכחו נקודה-פסיק וששום דבר לא יעבוד בפעם הראשונה. הוא כאן כדי להזכיר לכם לבדוק הכל פעמיים.",
+                    quote: "בטח תריצו את האפליקציה ושכחתם לחבר את הטלפון למחשב. קלאסי."
                 },
                 smiley: {
                     name: "סמיילי פייס (Smiley Face)",
                     role: "המעודד הנצחי",
-                    desc: "רואה בכל שגיאה (Exception) הזדמנות ללמוד משהו חדש. הוא זה שידחוף אתכם להמשיך גם כשהכל אדום.",
-                    quote: "היי! קרסה האפליקציה? מעולה! זה אומר שאנחנו מאתגרים את המערכת!"
+                    desc: "מתלהב מכל כפתור שעובד! הוא כאן כדי להזכיר לכם שכל מתכנת בכיר התחיל מ-Hello World.",
+                    quote: "היי! הצלחתם להעביר טקסט ממסך למסך? אתם גאונים! זה הבסיס להכל!"
                 }
             },
             mission: {
-                title: "המשימה: פרויקט כרונוס (קפסולת הזמן)",
-                intro: "ברוכים הבאים לתרגול המעשי הראשון. אנחנו לא סתם כותבים קוד, אנחנו בונים את 'כספת הזמן' הראשונה שלכם.",
+                title: "המיני-פרויקט: כרונוס (קפסולת הזמן)",
+                intro: "ברוכים הבאים לפרויקט הראשון שלכם! המטרה: לבנות אפליקציה פשוטה ששומרת סודות.",
                 backstory: {
                     title: "סיפור הרקע: המסר לעתיד",
-                    content: "שנת 2035. האינטרנט קרס, וכל המידע בעולם נמחק. רק מכשירים בודדים שרדו עם מידע שנשמר מקומית בצורה מאובטחת. המשימה שלכם: לבנות אפליקציה שתשמש כ'קפסולת זמן'. המשתמש צריך להקליד מסר סודי לעצמו העתידי ולנעול אותו בכספת. האתגר? המסר חייב לשרוד גם אם הסוללה נגמרת או האפליקציה נסגרת. אם לא תשתמשו נכון בזיכרון המכשיר - המסר יאבד לנצח.",
+                    content: "שנת 2035. האינטרנט קרס. המשימה שלכם כמתכנתים צעירים היא לבנות 'כספת זמן' בטלפון. המשתמש צריך להקליד מסר סודי, לנעול אותו בזיכרון של המכשיר, ולפתוח אותו רק במסך מיוחד. זה התרגול המושלם לשלושת הדברים הכי חשובים באנדרואיד: עיצוב, שמירה ומעבר מסכים.",
                     img_desc: ""
                 },
                 steps: [
                     {
                         id: 1,
-                        title: "שלב 1: עיצוב הכספת (UI)",
-                        goal: "בניית ממשק המשתמש שבו כותבים את המסר הסודי.",
+                        title: "שלב 1: המסך הראשון (UI)",
+                        goal: "ללמוד לעצב מסך ולקשר אותו לקוד Java.",
                         tasks: [
                             "פתחו את Android Studio וצרו פרויקט חדש מסוג <b>Empty Views Activity</b>.",
-                            "בעיצוב (XML): הוסיפו EditText (לכתיבת המסר), וכפתור Button עם הטקסט 'נעל בכספת'.",
-                            "הוסיפו ImageView של מנעול כדי לאווירה.",
-                            "ב-Java: בצעו 'Binding' (קישור) בעזרת findViewById לכל הרכיבים."
+                            "בעיצוב (XML): גררו EditText (לכתיבה) ו-Button (לשמירה) למסך.",
+                            "הוסיפו תמונה (ImageView) של מנעול ליופי.",
+                            "ב-Java: השתמשו ב-findViewById כדי 'לתפוס' את הרכיבים מהעיצוב."
                         ],
-                        bummerQuote: "שימו לב שבחרתם Empty Views Activity ולא משהו עתיק. ואל תשכחו ID לרכיבים, אחרת הג'אווה שלכם תהיה עיוורת.",
-                        smileyQuote: "המסך הראשון שלכם! ברגע שתריצו ותראו את הכפתור והתיבה על הטלפון, תרגישו כמו האקרים אמיתיים."
+                        bummerQuote: "שימו לב לא לקרוא לכפתור 'button1', אלא בשם הגיוני. אחרת תלכו לאיבוד בקוד של עצמכם.",
+                        smileyQuote: "ברגע שתריצו את האפליקציה ותראו את העיצוב שלכם על הטלפון - זה הקסם! יצרתם משהו מכלום."
                     },
                     {
                         id: 2,
-                        title: "שלב 2: מנגנון הנעילה (Storage)",
-                        goal: "לשמור את המסר בזיכרון כך שלא יימחק בסגירת האפליקציה.",
+                        title: "שלב 2: הזיכרון (Storage)",
+                        goal: "ללמוד איך הטלפון זוכר דברים גם אחרי שיוצאים מהאפליקציה.",
                         tasks: [
-                            "צרו מנגנון SharedPreferences (הזיכרון של הכספת).",
-                            "בלחיצה על הכפתור: קחו את הטקסט, שימרו אותו ב-SharedPrefs ובצעו <b>commit</b>.",
-                            "בפתיחת האפליקציה (onCreate): בדקו אם יש מסר שמור? אם כן, הציגו הודעה 'הכספת נעולה ומכילה מידע'.",
+                            "נלמד להשתמש ב-SharedPreferences (כמו פתק קטן שהטלפון שומר בצד).",
+                            "בלחיצה על הכפתור: ניקח את הטקסט ונשמור אותו בזיכרון.",
+                            "בפתיחת האפליקציה: נבדוק אם יש כבר פתק שמור? אם כן, נודיע למשתמש שיש סוד בכספת.",
                         ],
-                        bummerQuote: "אם תשכחו לעשות apply או commit, המסר ייעלם כאילו לא היה. ואז ב-2035 תפתחו כספת ריקה. מביך.",
-                        smileyQuote: "זה הרגע הקריטי! אתם מלמדים את הטלפון 'לזכור'. זה הבסיס לכל אפליקציה שתבנו בעתיד!"
+                        bummerQuote: "זה החלק הטריקי. אם לא תכתבו את הפקודה 'apply', הטלפון ישכח הכל ברגע שתסובבו את המסך.",
+                        smileyQuote: "זה הרגע שבו האפליקציה הופכת לחכמה! היא זוכרת אתכם. זה הבסיס לכל משחק שתבנו בעתיד."
                     },
                     {
                         id: 3,
-                        title: "שלב 3: חדר הסודות (Intents)",
-                        goal: "יצירת מסך נפרד ומוגן לצפייה במסר שנשמר.",
+                        title: "שלב 3: מעבר מסך (Intents)",
+                        goal: "ללמוד איך יוצרים מסך חדש ועוברים אליו.",
                         tasks: [
-                            "צרו Activity חדש בשם SecretActivity.",
-                            "במסך הראשי, אם יש מסר שמור, הוסיפו כפתור 'פתח כספת' שמעביר ל-Activity החדש (Intent).",
-                            "במסך הסוד: שלפו את המידע מה-SharedPrefs והציגו אותו ב-TextView גדול.",
+                            "צרו Activity חדש בשם SecretActivity (מסך הסודות).",
+                            "במסך הראשי, צרו כפתור שמעביר למסך החדש בעזרת Intent (כמו קישור באינטרנט).",
+                            "במסך הסוד: הציגו את הטקסט ששמרנו בשלב הקודם.",
                         ],
-                        bummerQuote: "אל תשכחו להצהיר על ה-Activity החדש ב-Manifest, אחרת האפליקציה תרסק את עצמה לדעת.",
-                        smileyQuote: "דמיינו את המעבר הזה: קליק אחד, ואתם בתוך החדר הסודי שרק אתם יצרתם. איזה סיפוק!"
+                        bummerQuote: "אל תשכחו להוסיף את המסך החדש ל-Manifest (תעודת הזהות של האפליקציה), אחרת היא תקרוס.",
+                        smileyQuote: "מעבר מסך זה כמו לעבור שלב במשחק! בניתם אפליקציה אמיתית עם זרימה והגיון. כל הכבוד!"
                     }
                 ]
             },
             checklist: {
-                title: "צ'ק ליסט הגשה: האם הכספת עמידה?",
-                intro: "לפני שמגישים למורה, בואו נראה שהקפסולה שלכם מוכנה לשיגור לעתיד.",
+                title: "צ'ק ליסט הגשה (מיני-פרויקט)",
+                intro: "לפני שמראים למורה, בואו נראה שהבסיס עובד כמו שצריך.",
                 items: [
-                    { id: "c1", text: "הפרויקט נוצר כ-Empty Views Activity והוא רץ ללא שגיאות", checked: false },
-                    { id: "c2", text: "יש שדה טקסט וכפתור 'נעילה' שעובד", checked: false },
-                    { id: "c3", text: "לאחר סגירת האפליקציה ופתיחה מחדש - המידע נשמר? (Persistence)", checked: false },
-                    { id: "c4", text: "קיים מעבר תקין למסך הסודות (Activity 2)", checked: false },
-                    { id: "c5", text: "המסר הסודי מוצג נכון במסך השני", checked: false }
+                    { id: "c1", text: "הפרויקט נפתח בלי שגיאות אדומות (Build Success)", checked: false },
+                    { id: "c2", text: "יש שדה טקסט וכפתור שעובדים", checked: false },
+                    { id: "c3", text: "המידע נשמר גם אם סוגרים את האפליקציה לגמרי", checked: false },
+                    { id: "c4", text: "יש מעבר תקין למסך השני (Activity 2)", checked: false },
+                    { id: "c5", text: "הקוד מסודר עם שמות ברורים למשתנים", checked: false }
                 ]
             },
             github: {
                 title: "שמירה וגיבוי ב-GitHub",
-                subtitle: "כי המחשב תמיד מתקלקל יום לפני ההגשה",
-                intro: "גיטהאב (GitHub) הוא המקום בו אנחנו שומרים את הקוד שלנו בענן. זה לא רק גיבוי, זה גם כרטיס הביקור המקצועי שלכם.",
+                subtitle: "כי המחשב תמיד מתקלקל ברגע הכי גרוע",
+                intro: "גיטהאב (GitHub) הוא המקום בו אנחנו שומרים את הקוד שלנו בענן. זה הרגל מצוין להתחיל כבר בכיתה י\"א.",
                 steps: [
                     {
                         title: "1. יצירת חשבון",
-                        desc: "היכנסו לאתר github.com ופתחו חשבון חינמי. בחרו שם משתמש מקצועי (עדיף בלי 'gaming123')."
+                        desc: "היכנסו לאתר github.com ופתחו חשבון חינמי. זה ישמש אתכם עד י\"ב ומעבר."
                     },
                     {
                         title: "2. הפעלת Git באנדרואיד סטודיו",
-                        desc: "בתפריט העליון, לחצו על <b>VCS</b> (או Git) -> ואז <b>Enable Version Control Integration</b>. בחרו ב-<b>Git</b> ולחצו OK."
+                        desc: "בתפריט העליון: VCS -> Enable Version Control Integration -> בחרו Git."
                     },
                     {
                         title: "3. שיתוף הפרויקט",
-                        desc: "לחצו על לשונית <b>Git</b> בתפריט העליון -> <b>GitHub</b> -> <b>Share Project on GitHub</b>. <br> ייתכן שתתבקשו להתחבר לחשבון שיצרתם."
+                        desc: "בתפריט Git -> GitHub -> Share Project on GitHub. <br> התחברו לחשבון שלכם."
                     },
                     {
-                        title: "4. ביצוע Commit & Push ראשון",
-                        desc: "תנו שם לפרויקט (Repository Name), כתבו תיאור קצר, ולחצו <b>Share</b>. המתינו להודעה שהכל עלה בהצלחה!"
+                        title: "4. שמירה ראשונה (Push)",
+                        desc: "תנו שם לפרויקט ולחצו Share. המתינו להודעה הירוקה למטה."
                     },
                     {
-                        title: "5. עדכונים שוטפים (Commit & Push)",
-                        desc: "בכל פעם שסיימתם פיצ'ר: <br>1. לחצו על ה-V הירוק (Commit). <br>2. כתבו מה עשיתם. <br>3. לחצו Commit and Push."
+                        title: "5. שמירה שוטפת",
+                        desc: "בכל סוף שיעור: לחצו על ה-V הירוק (Commit), כתבו 'סוף שיעור', ולחצו Commit and Push."
                     }
                 ],
-                bummerQuote: "רק אל תעשו Push לקבצים שצריכים להיות ב-gitignore, ואז תבכו לי שיש לכם התנגשויות (Conflicts) בקבצי הגדרות של הסטודיו.",
-                smileyQuote: "עכשיו הקוד שלכם בטוח! זה הצעד הראשון שלכם להיות מפתחי תוכנה מקצועיים עם תיק עבודות שאפשר להראות בראיונות."
+                bummerQuote: "אל תהיו מאלה שבאים למורה ואומרים 'הפרויקט היה על הדיסק-און-קי שאבד'. תגבו הכל.",
+                smileyQuote: "זהו! עכשיו הקוד שלכם בטוח בענן. אתם מתחילים לעבוד כמו מקצוענים!"
+            },
+            home_work: {
+                title: "עבודה מהבית (GitHub Clone)",
+                subtitle: "איך להמשיך את הפרויקט במחשב האישי?",
+                intro: "רוצים להמשיך לעבוד על הפרויקט בבית? מעולה! אין צורך להעביר קבצים בדיסק-און-קי. פשוט 'מושכים' את הפרויקט מ-GitHub. תהליך זה נקרא <b>Clone</b>.",
+                steps: [
+                    {
+                        title: "1. הכנת המחשב בבית",
+                        desc: "וודאו שהתקנתם <b>Android Studio</b> ו-<b>Git</b> במחשב בבית (בדיוק כמו בכיתה)."
+                    },
+                    {
+                        title: "2. העתקת הקישור מ-GitHub",
+                        desc: "היכנסו לאתר GitHub לפרויקט שלכם. לחצו על הכפתור הירוק <b>Code</b> והעתיקו את כתובת ה-HTTPS."
+                    },
+                    {
+                        title: "3. פתיחה בסטודיו (Get from VCS)",
+                        desc: "פתחו את Android Studio. במסך הפתיחה לחצו על <b>Get from VCS</b> (בגרסאות ישנות: Check out from Version Control)."
+                    },
+                    {
+                        title: "4. הדבקה ושיגור",
+                        desc: "הדביקו את הקישור שהעתקתם בשורת ה-URL ולחצו <b>Clone</b>. הפרויקט יירד למחשב שלכם וייפתח."
+                    },
+                    {
+                        title: "5. סיום עבודה בבית",
+                        desc: "סיימתם לעבוד? אל תשכחו לעשות <b>Commit</b> ו-<b>Push</b> כדי שהשינויים יחזרו לענן (ויהיו זמינים בשיעור הבא)."
+                    }
+                ],
+                bummerQuote: "בטח גרסת ה-Gradle בבית שונה מזו שבבית ספר והכל יהיה אדום. אל תילחצו, פשוט תנו לסטודיו לעדכן מה שהוא מבקש.",
+                smileyQuote: "איזה כיף! עכשיו אתם לא מוגבלים לשעות בית הספר. הפרויקט איתכם בכל מקום, מתי שתרצו!"
             }
         };
 
@@ -271,6 +303,7 @@
                 case 'mission': renderMission(contentDiv); break;
                 case 'checklist': renderChecklist(contentDiv); break;
                 case 'github': renderGithub(contentDiv); break;
+                case 'home_work': renderHomeWork(contentDiv); break;
             }
         }
 
@@ -390,7 +423,7 @@
                                 <div class="text-5xl">🔐</div>
                                 <div>
                                     <h3 class="font-bold text-sky-400 text-lg">המטרה האסטרטגית</h3>
-                                    <p class="text-slate-400">ללמוד לשמור מידע (Persistence) ולנווט בין מסכים מאובטחים. גורל המידע בידיים שלכם.</p>
+                                    <p class="text-slate-400">ללמוד את הבסיס (UI, Storage, Intents) לקראת הפרויקט הגדול של י"ב.</p>
                                 </div>
                                 <button onclick="setTab(0)" class="mr-auto bg-sky-600 hover:bg-sky-500 text-white font-bold py-3 px-8 rounded-full transition shadow-lg">
                                     קבל את המשימה ➜
@@ -592,6 +625,66 @@
                                     <a href="https://github.com/" target="_blank" class="inline-block bg-gray-800 text-white font-bold py-3 px-6 rounded-full hover:bg-gray-900 transition shadow-lg">
                                         מעבר ל-GitHub ➜
                                     </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderHomeWork(container) {
+            const data = appData.home_work;
+            
+            container.innerHTML = `
+                <div class="bg-white rounded-2xl shadow-sm p-8 border-t-4 border-indigo-500 animate-fade-in">
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <h2 class="text-3xl font-bold text-slate-800 mb-2 flex items-center gap-3">
+                                <span>💻</span> ${data.title}
+                            </h2>
+                            <h3 class="text-xl text-indigo-600">${data.subtitle}</h3>
+                        </div>
+                    </div>
+                    
+                    <p class="text-slate-600 text-lg leading-relaxed mb-8 bg-indigo-50 p-4 rounded-lg border border-indigo-100">
+                        ${data.intro}
+                    </p>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <!-- Steps Column -->
+                        <div class="lg:col-span-2 space-y-6">
+                            ${data.steps.map(step => `
+                                <div class="bg-white border border-gray-100 rounded-xl p-6 shadow-sm hover:shadow-md transition border-l-4 border-l-indigo-200">
+                                    <h4 class="font-bold text-slate-800 text-lg mb-2 text-indigo-700">${step.title}</h4>
+                                    <p class="text-slate-600 leading-relaxed">${step.desc}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+
+                        <!-- Mentor Column -->
+                        <div class="lg:col-span-1">
+                            <div class="bg-white rounded-2xl shadow-sm p-6 sticky top-6 border border-gray-100">
+                                <h4 class="font-bold text-slate-700 mb-4 text-center border-b pb-2">טיפים מהשטח</h4>
+                                
+                                <div class="mb-6">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <span class="text-2xl">😎</span>
+                                        <span class="font-bold text-sm text-yellow-600">סמיילי</span>
+                                    </div>
+                                    <div class="bg-yellow-50 p-4 rounded-xl text-sm italic text-yellow-800 border border-yellow-100">
+                                        "${data.smileyQuote}"
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <span class="text-2xl">😒</span>
+                                        <span class="font-bold text-sm text-gray-600">המבאס</span>
+                                    </div>
+                                    <div class="bg-gray-100 p-4 rounded-xl text-sm italic text-gray-700 border border-gray-200">
+                                        "${data.bummerQuote}"
+                                    </div>
                                 </div>
                             </div>
                         </div>
