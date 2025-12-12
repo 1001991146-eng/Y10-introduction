@@ -77,7 +77,7 @@
 
     <!-- Placeholder Comments -->
     <!-- Chosen Palette: Junior Edition (Sky Blue/White/Slate) - Friendly, educational, approachable. -->
-    <!-- Application Structure Plan: Dashboard layout. Updated "Work from Home" section with specific download links and clear GitHub instructions. -->
+    <!-- Application Structure Plan: Dashboard layout. Updated "Mission" steps to reflect specific UI/UX requirements: 2 buttons, status TextView, and specific navigation logic. -->
 </head>
 <body class="h-screen flex flex-col md:flex-row overflow-hidden">
 
@@ -113,7 +113,7 @@
         </div>
         
         <div class="p-4 bg-slate-50 text-center text-xs text-slate-400 border-t">
-            גרסה 2.3 Junior <br> קישורי הורדה ו-GitHub מורחב
+            גרסה 2.4 Junior <br> תיקון משימת כרונוס
         </div>
     </aside>
 
@@ -174,52 +174,51 @@
                 steps: [
                     {
                         id: 1,
-                        title: "שלב 1: המסך הראשון (UI)",
-                        goal: "ללמוד לעצב מסך ולקשר אותו לקוד Java.",
+                        title: "שלב 1: ממשק הכספת (UI)",
+                        goal: "בניית לוח הבקרה של הכספת.",
                         tasks: [
-                            "פתחו את Android Studio וצרו פרויקט חדש מסוג <b>Empty Views Activity</b>.",
-                            "בעיצוב (XML): גררו EditText (לכתיבה) ו-Button (לשמירה) למסך.",
-                            "הוסיפו תמונה (ImageView) של מנעול ליופי.",
-                            "ב-Java: השתמשו ב-findViewById כדי 'לתפוס' את הרכיבים מהעיצוב."
+                            "צרו פרויקט <b>Empty Views Activity</b>.",
+                            "ב-XML הוסיפו: <b>ImageView</b> (מנעול), <b>EditText</b> (להזנת הסוד), ו-<b>TextView</b> (להצגת הסטטוס: 'יש סוד/אין סוד').",
+                            "הוסיפו 2 כפתורים למסך: אחד בשם <b>Save in vault</b> והשני <b>Open vault</b>.",
+                            "ב-Java: בצעו findViewById לכל 5 הרכיבים כדי שנוכל לשלוט בהם."
                         ],
-                        bummerQuote: "שימו לב לא לקרוא לכפתור 'button1', אלא בשם הגיוני. אחרת תלכו לאיבוד בקוד של עצמכם.",
-                        smileyQuote: "ברגע שתריצו את האפליקציה ותראו את העיצוב שלכם על הטלפון - זה הקסם! יצרתם משהו מכלום."
+                        bummerQuote: "חמישה רכיבים במסך אחד? אם לא תסדרו אותם נכון ב-Layout, הכפתור יכסה את הטקסט והמנעול יהיה הפוך. בהצלחה.",
+                        smileyQuote: "שני כפתורים, תמונה וטקסט? זה כבר נראה כמו אפליקציה אמיתית! איזה כיף לראות את העיצוב מתעורר לחיים."
                     },
                     {
                         id: 2,
-                        title: "שלב 2: הזיכרון (Storage)",
-                        goal: "ללמוד איך הטלפון זוכר דברים גם אחרי שיוצאים מהאפליקציה.",
+                        title: "שלב 2: מנגנון הנעילה והסטטוס",
+                        goal: "לבדוק האם יש סוד שמור ולבצע שמירה.",
                         tasks: [
-                            "נלמד להשתמש ב-SharedPreferences (כמו פתק קטן שהטלפון שומר בצד).",
-                            "בלחיצה על הכפתור: ניקח את הטקסט ונשמור אותו בזיכרון.",
-                            "בפתיחת האפליקציה: נבדוק אם יש כבר פתק שמור? אם כן, נודיע למשתמש שיש סוד בכספת.",
+                            "ב-onCreate: בדקו ב-Shared Preferences האם קיים סוד? אם כן, הציגו ב-TextView: 'הכספת נעולה'. אחרת 'הכספת פתוחה'.",
+                            "בלחיצה על <b>Save in vault</b>: קחו את הטקסט מה-EditText, שימרו אותו ב-SharedPrefs (עם commit), ועדכנו את ה-TextView ל-'הסוד נשמר'.",
                         ],
-                        bummerQuote: "זה החלק הטריקי. אם לא תכתבו את הפקודה 'apply', הטלפון ישכח הכל ברגע שתסובבו את המסך.",
-                        smileyQuote: "זה הרגע שבו האפליקציה הופכת לחכמה! היא זוכרת אתכם. זה הבסיס לכל משחק שתבנו בעתיד."
+                        bummerQuote: "אל תשכחו לבדוק null לפני שאתם שומרים, ואם לא תעשו commit שום דבר לא ישמר באמת.",
+                        smileyQuote: "ראיתם איך הסטטוס משתנה ברגע ששומרים? זה פידבק למשתמש! יצרתם אינטראקציה חכמה."
                     },
                     {
                         id: 3,
-                        title: "שלב 3: מעבר מסך (Intents)",
-                        goal: "ללמוד איך יוצרים מסך חדש ועוברים אליו.",
+                        title: "שלב 3: פתיחת הכספת (Intents)",
+                        goal: "מעבר למסך הסודי להצגת המידע.",
                         tasks: [
-                            "צרו Activity חדש בשם SecretActivity (מסך הסודות).",
-                            "במסך הראשי, צרו כפתור שמעביר למסך החדש בעזרת Intent (כמו קישור באינטרנט).",
-                            "במסך הסוד: הציגו את הטקסט ששמרנו בשלב הקודם.",
+                            "צרו Activity חדש בשם SecretActivity.",
+                            "בלחיצה על <b>Open vault</b>: בצעו מעבר למסך החדש בעזרת Intent.",
+                            "במסך החדש (SecretActivity): שלפו את הסוד מה-SharedPrefs והציגו אותו ב-TextView גדול.",
                         ],
-                        bummerQuote: "אל תשכחו להוסיף את המסך החדש ל-Manifest (תעודת הזהות של האפליקציה), אחרת היא תקרוס.",
-                        smileyQuote: "מעבר מסך זה כמו לעבור שלב במשחק! בניתם אפליקציה אמיתית עם זרימה והגיון. כל הכבוד!"
+                        bummerQuote: "אם תנסו לפתוח כספת ריקה, מה יקרה? האפליקציה תקרוס או שתציג מסך ריק? תחשבו על מקרי קצה.",
+                        smileyQuote: "הרגע הזה שבו לוחצים על Open ועוברים מסך לראות את הסוד שכתבתם קודם... זה קסם של תכנות!"
                     }
                 ]
             },
             checklist: {
                 title: "צ'ק ליסט הגשה (מיני-פרויקט)",
-                intro: "לפני שמראים למורה, בואו נראה שהבסיס עובד כמו שצריך.",
+                intro: "לפני שמראים למורה, וודאו שהכספת מתפקדת כראוי.",
                 items: [
-                    { id: "c1", text: "הפרויקט נפתח בלי שגיאות אדומות (Build Success)", checked: false },
-                    { id: "c2", text: "יש שדה טקסט וכפתור שעובדים", checked: false },
-                    { id: "c3", text: "המידע נשמר גם אם סוגרים את האפליקציה לגמרי", checked: false },
-                    { id: "c4", text: "יש מעבר תקין למסך השני (Activity 2)", checked: false },
-                    { id: "c5", text: "הקוד מסודר עם שמות ברורים למשתנים", checked: false }
+                    { id: "c1", text: "במסך הראשי יש 2 כפתורים, תמונה, תיבת טקסט וסטטוס", checked: false },
+                    { id: "c2", text: "בפתיחת האפליקציה, הסטטוס מציג נכון האם קיים סוד", checked: false },
+                    { id: "c3", text: "לחיצה על Save שומרת את המידע ומעדכנת את הסטטוס", checked: false },
+                    { id: "c4", text: "לחיצה על Open מעבירה למסך השני", checked: false },
+                    { id: "c5", text: "המסך השני מציג את הסוד שנשמר בזיכרון", checked: false }
                 ]
             },
             github: {
