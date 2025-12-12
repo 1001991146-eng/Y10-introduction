@@ -77,7 +77,7 @@
 
     <!-- Placeholder Comments -->
     <!-- Chosen Palette: Junior Edition (Sky Blue/White/Slate) - Friendly, educational, approachable. -->
-    <!-- Application Structure Plan: Dashboard layout. Updated "Mission" steps to reflect "Smart Button" logic (Save/Open toggle). -->
+    <!-- Application Structure Plan: Dashboard layout. Fixed "Mission" logic: Step 1 now has 2 buttons. Step 2 teaches Visibility (GONE/VISIBLE). Step 3 handles overwrite logic. -->
 </head>
 <body class="h-screen flex flex-col md:flex-row overflow-hidden">
 
@@ -113,7 +113,7 @@
         </div>
         
         <div class="p-4 bg-slate-50 text-center text-xs text-slate-400 border-t">
-            גרסה 2.5 Junior <br> כפתור חכם (Smart Button)
+            גרסה 2.6 Junior <br> תיקון לוגיקת כפתורים
         </div>
     </aside>
 
@@ -175,51 +175,52 @@
                     {
                         id: 1,
                         title: "שלב 1: ממשק הכספת (UI)",
-                        goal: "בניית לוח בקרה עם כפתור 'חכם' שמשנה את תפקידו.",
+                        goal: "בניית מסך עם שני כפתורים שמתנהגים בצורה חכמה.",
                         tasks: [
-                            "צרו פרויקט <b>Empty Views Activity</b>.",
-                            "ב-XML הוסיפו: <b>ImageView</b> (מנעול), <b>EditText</b> (להזנת הסוד), ו-<b>TextView</b> (לסטטוס).",
-                            "הוסיפו כפתור <b>אחד</b> בלבד. תנו לו ID כמו <code>btnAction</code>.",
-                            "ב-Java: בצעו Binding לכל הרכיבים."
+                            "ב-XML הוסיפו: <b>EditText</b> (לכתיבה), <b>ImageView</b> (מנעול), ו-<b>TextView</b> (לסטטוס).",
+                            "הוסיפו שני כפתורים: <code>btnSave</code> ו-<code>btnOpen</code>.",
+                            "ב-Java: בצעו findViewById לכל הרכיבים."
                         ],
-                        bummerQuote: "כפתור אחד שעושה שני דברים? אתם בטוח תסתבכו עם ה-if/else בתוך ה-Listener. תכינו את הטישו.",
-                        smileyQuote: "זה נקרא Smart UI! המשתמש לא צריך לנחש - הכפתור אומר לו בדיוק מה לעשות. גאוני!"
+                        bummerQuote: "שימו לב: אם לא תשתמשו ב-Constraints, הכפתורים יעלו אחד על השני.",
+                        smileyQuote: "עיצוב זה השלב שבו הרעיון מקבל צורה. זה נראה כמו אפליקציה!"
                     },
                     {
                         id: 2,
-                        title: "שלב 2: בדיקת מצב (State)",
-                        goal: "לבדוק בפתיחה האם יש סוד ולעדכן את הכפתור.",
+                        title: "שלב 2: הקסם הנעלם (Visibility)",
+                        goal: "נלמד להסתיר ולהציג כפתורים לפי הצורך (Logic).",
                         tasks: [
-                            "ב-onCreate: בדקו ב-Shared Preferences האם כבר קיים סוד?",
-                            "<b>אם יש סוד:</b> עדכנו את הכפתור לטקסט 'Open Vault' ואת הסטטוס ל-'הכספת נעולה'.",
-                            "<b>אם אין סוד:</b> עדכנו את הכפתור לטקסט 'Save Secret' ואת הסטטוס ל-'הכספת פתוחה'."
+                            "אנחנו רוצים שכפתור ה-<b>Open</b> יופיע רק אם יש סוד.",
+                            "ב-onCreate: בדקו ב-SharedPrefs האם יש סוד.",
+                            "אם <b>אין סוד</b>: הסתירו את כפתור הפתיחה: <code>btnOpen.setVisibility(View.GONE)</code>.",
+                            "אם <b>יש סוד</b>: הציגו אותו: <code>View.VISIBLE</code> ועדכנו את הסטטוס ל-'הכספת נעולה'."
                         ],
-                        bummerQuote: "אם תשכחו לקרוא לפונקציית הבדיקה ב-onCreate, הכפתור יתקע על הטקסט הלא נכון. פדיחה.",
-                        smileyQuote: "האפליקציה 'מבינה' את המצב שלה! זה ההבדל בין דף אינטרנט טיפש לאפליקציה חכמה."
+                        bummerQuote: "אם תשתמשו ב-INVISIBLE במקום GONE, הכפתור ישאיר חור ריק במסך. אל תעשו פדיחות.",
+                        smileyQuote: "וואו! האפליקציה מגיבה למצב הנתונים. זה נקרא ממשק דינמי (Dynamic UI)."
                     },
                     {
                         id: 3,
-                        title: "שלב 3: הפעולה (Smart Click)",
-                        goal: "הכפתור צריך לדעת מה לעשות לפי הטקסט שעליו.",
+                        title: "שלב 3: שמירה ועדכון",
+                        goal: "לאפשר למשתמש לעדכן את הסוד הקיים.",
                         tasks: [
-                            "ב-OnClickListener: בדקו מה הטקסט הנוכחי על הכפתור (או האם יש סוד בזיכרון).",
-                            "<b>אם המצב הוא Save:</b> שמרו את הסוד ב-SharedPrefs, בצעו commit, ושנו את הכפתור ל-Open.",
-                            "<b>אם המצב הוא Open:</b> בצעו Intent ועברו למסך SecretActivity להצגת הסוד."
+                            "בלחיצה על <b>Save</b>: קחו את הטקסט, שימרו ב-SharedPrefs (commit).",
+                            "<b>חשוב:</b> מיד אחרי השמירה, הפכו את כפתור ה-Open ל-VISIBLE.",
+                            "בלחיצה על <b>Open</b>: עברו ל-SecretActivity עם Intent.",
+                            "ככה המשתמש תמיד יכול ללחוץ שוב על Save ולעדכן את הסוד!"
                         ],
-                        bummerQuote: "המלצה שלי? תשתמשו במשתנה בוליאני (isLocked) כדי לדעת את המצב. אל תסתמכו על הטקסט של הכפתור, זה חובבני.",
-                        smileyQuote: "לחיצה אחת - שתי פעולות שונות! אתם מתכנתים לוגיקה אמיתית עכשיו."
+                        bummerQuote: "אל תשכחו לנקות את ה-EditText אחרי השמירה (`setText(\"\")`), אחרת הסוד נשאר גלוי למסך.",
+                        smileyQuote: "פתרתם באג לוגי! עכשיו אפשר גם לשמור סוד חדש וגם לפתוח את הישן. כל הכבוד!"
                     }
                 ]
             },
             checklist: {
                 title: "צ'ק ליסט הגשה (מיני-פרויקט)",
-                intro: "לפני שמראים למורה, וודאו שהכפתור החכם עובד.",
+                intro: "לפני שמראים למורה, וודאו שהלוגיקה עובדת פיקס.",
                 items: [
-                    { id: "c1", text: "יש כפתור יחיד שמשנה את הטקסט שלו", checked: false },
-                    { id: "c2", text: "בפתיחה ראשונה (כשאין סוד) הכפתור מציג Save", checked: false },
-                    { id: "c3", text: "אחרי שמירה, הכפתור משתנה אוטומטית ל-Open", checked: false },
-                    { id: "c4", text: "סגירה ופתיחה מחדש של האפליקציה שומרת על המצב (Open)", checked: false },
-                    { id: "c5", text: "לחיצה על Open מעבירה למסך הסוד", checked: false }
+                    { id: "c1", text: "בפתיחה ראשונה (כשאין סוד) כפתור Open מוסתר", checked: false },
+                    { id: "c2", text: "אחרי לחיצה על Save, כפתור Open מופיע פתאום", checked: false },
+                    { id: "c3", text: "אפשר ללחוץ על Save שוב ושוב כדי לעדכן את הסוד", checked: false },
+                    { id: "c4", text: "סגירה ופתיחה של האפליקציה זוכרת אם יש סוד (כפתור Open מופיע)", checked: false },
+                    { id: "c5", text: "לחיצה על Open מעבירה למסך הסוד הנכון", checked: false }
                 ]
             },
             github: {
